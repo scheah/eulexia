@@ -11,9 +11,15 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.widget.AdapterView;
 import android.widget.TextView;
 import android.graphics.Typeface;
+
+import org.opencv.core.Mat;
+import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
+import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
@@ -25,7 +31,7 @@ import android.graphics.Typeface;
  *
  * @see <a href="https://developers.google.com/glass/develop/gdk/touch">GDK Developer Guide</a>
  */
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements CvCameraViewListener2, GestureDetector.OnGestureListener {
 
     /**
      * {@link CardScrollView} to use as the main content view.
@@ -37,11 +43,15 @@ public class MainActivity extends Activity {
      */
     private View mView;
 
+    private GestureDetector mGestureDetector;
+    private GView mOpenCvCameraView; // Google Glass view
+
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
         mView = buildView();
+        mGestureDetector = new GestureDetector(this, this);
 
         mCardScroller = new CardScrollView(this);
         mCardScroller.setAdapter(new CardScrollAdapter() {
@@ -78,6 +88,9 @@ public class MainActivity extends Activity {
             }
         });
         setContentView(mCardScroller);
+
+        mOpenCvCameraView = (GView) findViewById(android.R.id.content); // get root view 
+        mOpenCvCameraView.setCvCameraViewListener(this);
     }
 
     @Override
@@ -90,6 +103,63 @@ public class MainActivity extends Activity {
     protected void onPause() {
         mCardScroller.deactivate();
         super.onPause();
+    }
+
+    ////////////////////// CAMERA STUFF ///////////////////////////
+    public void onCameraViewStarted(int width, int height) {
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2#onCameraViewStopped()
+     */
+    public void onCameraViewStopped() {
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2#onCameraFrame(org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame)
+     */
+    public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
+        return inputFrame.rgba();
+    }
+
+    ////////////////////// GESTURES ///////////////////////////////
+    @Override
+    public boolean onGenericMotionEvent(MotionEvent event) {
+        if (mGestureDetector != null) {
+            mGestureDetector.onTouchEvent(event);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        return false;
     }
 
     /**
