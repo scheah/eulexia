@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.TextView;
+import android.graphics.Typeface;
 
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
@@ -94,10 +96,19 @@ public class MainActivity extends Activity {
      * Builds a Glass styled "Hello World!" view using the {@link CardBuilder} class.
      */
     private View buildView() {
-        CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);
+        View view = new CardBuilder(this, CardBuilder.Layout.EMBED_INSIDE)
+                .setEmbeddedLayout(R.layout.test)
+                .setFootnote("Foods you tracked")
+                .setTimestamp("today")
+                .getView();
 
-        card.setText(R.string.hello_world);
-        return card.getView();
+        TextView textView1 = (TextView) view.findViewById(R.id.textView);
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "fonts/bookmanoldstyle.ttf");
+        textView1.setTypeface(tf);
+        textView1.setText("Water");
+
+        return view;
     }
 
 }
