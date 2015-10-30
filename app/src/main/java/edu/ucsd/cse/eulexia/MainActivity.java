@@ -87,10 +87,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Ges
                 am.playSoundEffect(Sounds.DISALLOWED);
             }
         });
-        setContentView(mCardScroller);
+        //setContentView(mCardScroller);
 
-        mOpenCvCameraView = (GView) findViewById(android.R.id.content); // get root view 
-        mOpenCvCameraView.setCvCameraViewListener(this);
+        //mOpenCvCameraView = (GView) findViewById(android.R.id.content); // get root view
+        //mOpenCvCameraView.setCvCameraViewListener(this);
     }
 
     @Override
@@ -162,23 +162,32 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Ges
         return false;
     }
 
+    // Changes font, commented out for now
+//    private View buildView() {
+//        View view = new CardBuilder(this, CardBuilder.Layout.EMBED_INSIDE)
+//                .setEmbeddedLayout(R.layout.test)
+//                .setFootnote("Foods you tracked")
+//                .setTimestamp("today")
+//                .getView();
+//
+//        TextView textView1 = (TextView) view.findViewById(R.id.textView);
+//        Typeface tf = Typeface.createFromAsset(getAssets(),
+//                "fonts/bookmanoldstyle.ttf");
+//        textView1.setTypeface(tf);
+//        textView1.setText("Water");
+//
+//        return view;
+//    }
+
     /**
      * Builds a Glass styled "Hello World!" view using the {@link CardBuilder} class.
      */
     private View buildView() {
-        View view = new CardBuilder(this, CardBuilder.Layout.EMBED_INSIDE)
-                .setEmbeddedLayout(R.layout.test)
-                .setFootnote("Foods you tracked")
-                .setTimestamp("today")
-                .getView();
+        CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);
 
-        TextView textView1 = (TextView) view.findViewById(R.id.textView);
-        Typeface tf = Typeface.createFromAsset(getAssets(),
-                "fonts/bookmanoldstyle.ttf");
-        textView1.setTypeface(tf);
-        textView1.setText("Water");
-
-        return view;
+        card.setText(R.string.hello_world);
+        return card.getView();
     }
+
 
 }
