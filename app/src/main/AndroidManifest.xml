@@ -24,6 +24,7 @@
                 android:name="com.google.android.glass.VoiceTrigger"
                 android:resource="@xml/voice_trigger" />
         </activity>
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     </application>
 
 </manifest>
