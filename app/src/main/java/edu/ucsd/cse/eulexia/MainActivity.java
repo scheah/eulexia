@@ -4,6 +4,7 @@ import com.google.android.glass.media.Sounds;
 import com.google.android.glass.widget.CardBuilder;
 import com.google.android.glass.widget.CardScrollAdapter;
 import com.google.android.glass.widget.CardScrollView;
+import com.google.android.glass.touchpad.*;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,13 +12,8 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.AdapterView;
-
-import org.opencv.core.Mat;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
@@ -29,7 +25,7 @@ import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
  *
  * @see <a href="https://developers.google.com/glass/develop/gdk/touch">GDK Developer Guide</a>
  */
-public class MainActivity extends Activity implements CvCameraViewListener2, GestureDetector.OnGestureListener {
+public class MainActivity extends Activity {
 
     /**
      * {@link CardScrollView} to use as the main content view.
@@ -42,14 +38,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Ges
     private View mView;
 
     private GestureDetector mGestureDetector;
-    private GView mOpenCvCameraView; // Google Glass view
 
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
         mView = buildView();
-        mGestureDetector = new GestureDetector(this, this);
+        mGestureDetector = createGestureDetector(this);
 
         mCardScroller = new CardScrollView(this);
         mCardScroller.setAdapter(new CardScrollAdapter() {
@@ -76,6 +71,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Ges
                 return AdapterView.INVALID_POSITION;
             }
         });
+
         // Handle the TAP event.
         mCardScroller.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -86,9 +82,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Ges
             }
         });
         setContentView(mCardScroller);
-
-        mOpenCvCameraView = (GView) findViewById(android.R.id.content); // get root view 
-        mOpenCvCameraView.setCvCameraViewListener(this);
     }
 
     @Override
@@ -103,63 +96,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Ges
         super.onPause();
     }
 
-    ////////////////////// CAMERA STUFF ///////////////////////////
-    public void onCameraViewStarted(int width, int height) {
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2#onCameraViewStopped()
-     */
-    public void onCameraViewStopped() {
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2#onCameraFrame(org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame)
-     */
-    public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
-        return inputFrame.rgba();
-    }
-
-    ////////////////////// GESTURES ///////////////////////////////
-    @Override
-    public boolean onGenericMotionEvent(MotionEvent event) {
-        if (mGestureDetector != null) {
-            mGestureDetector.onTouchEvent(event);
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean onDown(MotionEvent e) {
-        return false;
-    }
-
-    @Override
-    public void onShowPress(MotionEvent e) {
-    }
-
-    @Override
-    public boolean onSingleTapUp(MotionEvent e) {
-        return false;
-    }
-
-    @Override
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        return false;
-    }
-
-    @Override
-    public void onLongPress(MotionEvent e) {
-    }
-
-    @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        return false;
-    }
-
     /**
      * Builds a Glass styled "Hello World!" view using the {@link CardBuilder} class.
      */
@@ -170,4 +106,38 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Ges
         return card.getView();
     }
 
+    ////////////////////// GESTURES ///////////////////////////////
+    @Override
+    public boolean onGenericMotionEvent(MotionEvent event) {
+        if (mGestureDetector != null) {
+            return mGestureDetector.onMotionEvent(event);
+        }
+        return false;
+    }
+
+    private GestureDetector createGestureDetector(Context context) {
+        GestureDetector gestureDetector = new GestureDetector(context);
+        //Create a base listener for generic gestures
+        gestureDetector.setBaseListener(new GestureDetector.BaseListener() {
+            @Override
+            public boolean onGesture(Gesture gesture) {
+                if (gesture == Gesture.TAP) {
+                    // do something on tap
+                    return true;
+                } else if (gesture == Gesture.TWO_TAP) {
+                    // take picture and do OCR
+                    return true;
+                } else if (gesture == Gesture.SWIPE_RIGHT) {
+                    // do something on right (forward) swipe
+                    return true;
+                } else if (gesture == Gesture.SWIPE_LEFT) {
+                    // do something on left (backwards) swipe
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        return gestureDetector;
+    }
 }
