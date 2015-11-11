@@ -1,6 +1,5 @@
 package edu.ucsd.cse.eulexia;
 
-import com.google.android.glass.app.Card;
 import com.google.android.glass.media.Sounds;
 import com.google.android.glass.widget.CardBuilder;
 import com.google.android.glass.widget.CardScrollAdapter;
@@ -15,8 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.MotionEvent;
 import android.widget.AdapterView;
-import android.widget.TextView;
-import android.graphics.Typeface;
 
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
@@ -108,24 +105,6 @@ public class MainActivity extends Activity {
         card.setText(R.string.hello_world);
         return card.getView();
     }
-
-
-// Changes font, commented out for now
-//    private View buildView() {
-//        View view = new CardBuilder(this, CardBuilder.Layout.EMBED_INSIDE)
-//                .setEmbeddedLayout(R.layout.test)
-//                .setFootnote("Foods you tracked")
-//                .setTimestamp("today")
-//                .getView();
-//
-//        TextView textView1 = (TextView) view.findViewById(R.id.textView);
-//        Typeface tf = Typeface.createFromAsset(getAssets(),
-//                "fonts/bookmanoldstyle.ttf");
-//        textView1.setTypeface(tf);
-//        textView1.setText("Water");
-//
-//        return view;
-//    }
 
     ////////////////////// GESTURES ///////////////////////////////
     @Override
