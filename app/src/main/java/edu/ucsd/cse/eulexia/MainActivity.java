@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.MotionEvent;
 import android.widget.AdapterView;
+import android.content.Intent;
 
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
@@ -117,6 +118,8 @@ public class MainActivity extends Activity {
 
     private GestureDetector createGestureDetector(Context context) {
         GestureDetector gestureDetector = new GestureDetector(context);
+        final Intent intent = new Intent(context, OCRActivity.class);
+
         //Create a base listener for generic gestures
         gestureDetector.setBaseListener(new GestureDetector.BaseListener() {
             @Override
@@ -125,10 +128,9 @@ public class MainActivity extends Activity {
                     // do something on tap
                     return true;
                 } else if (gesture == Gesture.TWO_TAP) {
-                    // take picture and do OCR
+                    startActivity(intent);
                     return true;
                 } else if (gesture == Gesture.SWIPE_RIGHT) {
-                    // do something on right (forward) swipe
                     return true;
                 } else if (gesture == Gesture.SWIPE_LEFT) {
                     // do something on left (backwards) swipe

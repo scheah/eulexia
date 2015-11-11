@@ -19,18 +19,20 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.glass.widget.CardBuilder;
+import com.google.android.glass.widget.CardScrollAdapter;
+import com.google.android.glass.widget.CardScrollView;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
 public class OCRActivity extends Activity {
     public static final String DATA_PATH = Environment
             .getExternalStorageDirectory().toString() + "/Eulexia/";
 
-    // You should have the trained data file in assets folder
-    // You can get them at:
-    // http://code.google.com/p/tesseract-ocr/downloads/list
     public static final String lang = "eng";
 
     private static final String TAG = "OCRActivity.java";
@@ -41,6 +43,9 @@ public class OCRActivity extends Activity {
     protected boolean _taken;
 
     protected static final String PHOTO_TAKEN = "photo_taken";
+
+    private CardScrollView mCardScroller;
+    private View mView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,10 +65,6 @@ public class OCRActivity extends Activity {
 
         }
 
-        // lang.traineddata file with the app (in assets folder)
-        // You can get them at:
-        // http://code.google.com/p/tesseract-ocr/downloads/list
-        // This area needs work and optimization
         if (!(new File(DATA_PATH + "tessdata/" + lang + ".traineddata")).exists()) {
             try {
 
@@ -88,15 +89,58 @@ public class OCRActivity extends Activity {
             }
         }
 
+        mView = buildView();
+
+        mCardScroller = new CardScrollView(this);
+        mCardScroller.setAdapter(new CardScrollAdapter() {
+            @Override
+            public int getCount() {
+                return 1;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return mView;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                return mView;
+            }
+
+            @Override
+            public int getPosition(Object item) {
+                if (mView.equals(item)) {
+                    return 0;
+                }
+                return AdapterView.INVALID_POSITION;
+            }
+        });
+
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.main); // TODO - fix
-
-        _field = (EditText) findViewById(R.id.field); // TODO - fix
-        _button = (Button) findViewById(R.id.button); // TODO - fix
-        _button.setOnClickListener(new ButtonClickHandler());
+        setContentView(mCardScroller);
 
         _path = DATA_PATH + "/ocr.jpg";
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mCardScroller.activate();
+    }
+
+    @Override
+    protected void onPause() {
+        mCardScroller.deactivate();
+        super.onPause();
+    }
+
+    private View buildView() {
+        CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);
+
+        card.setText("OCR Activity");
+        return card.getView();
     }
 
     public class ButtonClickHandler implements View.OnClickListener {

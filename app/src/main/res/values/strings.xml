@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">eulexia</string>
-    <string name="title_activity_main">Hello World Immersion</string>
+    <string name="title_eulexia">Eulexia</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_ocr">OCR Activity</string>
 
     <string name="button_text">OCR!</string>
     <string name="text_hint">OCRed Text will appear here</string>
