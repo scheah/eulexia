@@ -66,16 +66,6 @@ public class MainActivity extends Activity {
         }
     }
 
-//    protected void startCameraActivity() {
-//        File file = new File(_path);
-//        Uri outputFileUri = Uri.fromFile(file);
-//
-//        final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-//
-//        startActivityForResult(intent, 0);
-//    }
-
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);

@@ -21,7 +21,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.glass.widget.CardBuilder;
@@ -37,7 +36,6 @@ public class OCRActivity extends Activity {
 
     private static final String TAG = "OCRActivity.java";
 
-    protected Button _button;
     protected EditText _field;
     protected String _path;
     protected boolean _taken;
@@ -89,7 +87,7 @@ public class OCRActivity extends Activity {
             }
         }
 
-        mView = buildView();
+        mView = buildView("OCR Activity");
 
         mCardScroller = new CardScrollView(this);
         mCardScroller.setAdapter(new CardScrollAdapter() {
@@ -122,6 +120,7 @@ public class OCRActivity extends Activity {
         setContentView(mCardScroller);
 
         _path = DATA_PATH + "/ocr.jpg";
+        startCameraActivity();
     }
 
     @Override
@@ -136,18 +135,11 @@ public class OCRActivity extends Activity {
         super.onPause();
     }
 
-    private View buildView() {
+    private View buildView( String text) {
         CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);
 
-        card.setText("OCR Activity");
+        card.setText(text);
         return card.getView();
-    }
-
-    public class ButtonClickHandler implements View.OnClickListener {
-        public void onClick(View view) {
-            Log.v(TAG, "Starting Camera app");
-            startCameraActivity();
-        }
     }
 
     // Simple android photo capture:
