@@ -16,6 +16,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.FileObserver;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 
+import com.google.android.glass.content.Intents;
 import com.google.android.glass.widget.CardBuilder;
 import com.google.android.glass.widget.CardScrollAdapter;
 import com.google.android.glass.widget.CardScrollView;
@@ -37,7 +39,7 @@ public class OCRActivity extends Activity {
     private static final String TAG = "OCRActivity.java";
 
     protected EditText _field;
-    protected String _path;
+    //protected String _path;
     protected boolean _taken;
 
     protected static final String PHOTO_TAKEN = "photo_taken";
@@ -119,7 +121,7 @@ public class OCRActivity extends Activity {
 
         setContentView(mCardScroller);
 
-        _path = DATA_PATH + "/ocr.jpg";
+        //_path = DATA_PATH + "/ocr.jpg";
         startCameraActivity();
     }
 
@@ -146,11 +148,11 @@ public class OCRActivity extends Activity {
     // http://labs.makemachine.net/2010/03/simple-android-photo-capture/
 
     protected void startCameraActivity() {
-        File file = new File(_path);
-        Uri outputFileUri = Uri.fromFile(file);
+//        File file = new File(_path);
+//        Uri outputFileUri = Uri.fromFile(file);
 
         final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
 
         startActivityForResult(intent, 0);
     }
@@ -161,9 +163,57 @@ public class OCRActivity extends Activity {
         Log.i(TAG, "resultCode: " + resultCode);
 
         if (resultCode == -1) {
-            onPhotoTaken();
+            String picturePath = data.getStringExtra(Intents.EXTRA_PICTURE_FILE_PATH);
+
+            processPictureWhenReady(picturePath);
+            onPhotoTaken(picturePath);
         } else {
             Log.v(TAG, "User cancelled");
+        }
+    }
+
+    private void processPictureWhenReady(final String picturePath) {
+        final File pictureFile = new File(picturePath);
+
+        if (pictureFile.exists()) {
+            // The picture is ready; process it.
+        } else {
+            // The file does not exist yet. Before starting the file observer, you
+            // can update your UI to let the user know that the application is
+            // waiting for the picture (for example, by displaying the thumbnail
+            // image and a progress indicator).
+
+            final File parentDirectory = pictureFile.getParentFile();
+            FileObserver observer = new FileObserver(parentDirectory.getPath(),
+                    FileObserver.CLOSE_WRITE | FileObserver.MOVED_TO) {
+                // Protect against additional pending events after CLOSE_WRITE
+                // or MOVED_TO is handled.
+                private boolean isFileWritten;
+
+                @Override
+                public void onEvent(int event, String path) {
+                    if (!isFileWritten) {
+                        // For safety, make sure that the file that was created in
+                        // the directory is actually the one that we're expecting.
+                        File affectedFile = new File(parentDirectory, path);
+                        isFileWritten = affectedFile.equals(pictureFile);
+
+                        if (isFileWritten) {
+                            stopWatching();
+
+                            // Now that the file is ready, recursively call
+                            // processPictureWhenReady again (on the UI thread).
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    processPictureWhenReady(picturePath);
+                                }
+                            });
+                        }
+                    }
+                }
+            };
+            observer.startWatching();
         }
     }
 
@@ -176,20 +226,20 @@ public class OCRActivity extends Activity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         Log.i(TAG, "onRestoreInstanceState()");
         if (savedInstanceState.getBoolean(OCRActivity.PHOTO_TAKEN)) {
-            onPhotoTaken();
+            //onPhotoTaken();
         }
     }
 
-    protected void onPhotoTaken() {
+    protected void onPhotoTaken(String path) {
         _taken = true;
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 4;
 
-        Bitmap bitmap = BitmapFactory.decodeFile(_path, options);
+        Bitmap bitmap = BitmapFactory.decodeFile(path, options);
 
         try {
-            ExifInterface exif = new ExifInterface(_path);
+            ExifInterface exif = new ExifInterface(path);
             int exifOrientation = exif.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION,
                     ExifInterface.ORIENTATION_NORMAL);

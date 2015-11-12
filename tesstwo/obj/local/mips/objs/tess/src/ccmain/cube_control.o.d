@@ -1,53 +1,53 @@
 obj/local/mips/objs/tess/src/ccmain/cube_control.o: \
  jni/com_googlecode_tesseract_android/src/ccmain/cube_control.cpp \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/ctype.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/cdefs.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/cdefs_elf.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/android/api-level.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/unistd.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/stdint.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/_types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/_types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/posix_types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/stddef.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/compiler.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/posix_types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/sgidefs.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/kernel.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/sysmacros.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/select.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/time.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/time.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/signal.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/limits.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/limits.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/limits.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/internal_types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/limits.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/syslimits.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/page.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/string.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/malloc.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/signal.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm-generic/signal.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/sigcontext.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/siginfo.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm-generic/siginfo.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/ucontext.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/user.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/sysconf.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/capability.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/pathconf.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/ctype.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/cdefs.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/cdefs_elf.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/android/api-level.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/unistd.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/stdint.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/_types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/_types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/posix_types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/stddef.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/compiler.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/posix_types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/sgidefs.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/kernel.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/sysmacros.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/select.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/time.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/time.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/signal.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/limits.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/limits.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/limits.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/internal_types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/limits.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/syslimits.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/page.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/string.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/malloc.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/signal.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm-generic/signal.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/sigcontext.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/siginfo.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm-generic/siginfo.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/ucontext.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/user.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/sysconf.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/capability.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/pathconf.h \
  jni/com_googlecode_leptonica_android/src/src/allheaders.h \
  jni/com_googlecode_leptonica_android/src/src/alltypes.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/stdio.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/stdlib.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/alloca.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/strings.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/memory.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/stdio.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/stdlib.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/alloca.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/strings.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/memory.h \
  jni/com_googlecode_leptonica_android/src/src/environ.h \
  jni/com_googlecode_leptonica_android/src/src/array.h \
  jni/com_googlecode_leptonica_android/src/src/bbuffer.h \
@@ -72,12 +72,12 @@ obj/local/mips/objs/tess/src/ccmain/cube_control.o: \
  jni/com_googlecode_leptonica_android/src/src/watershed.h \
  jni/com_googlecode_tesseract_android/src/cube/cube_object.h \
  jni/com_googlecode_tesseract_android/src/cube/char_samp.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/string \
+ /Users/andrewdu/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/string \
  jni/com_googlecode_tesseract_android/src/cube/bmp_8.h \
  jni/com_googlecode_tesseract_android/src/cube/con_comp.h \
  jni/com_googlecode_tesseract_android/src/cube/cached_file.h \
  jni/com_googlecode_tesseract_android/src/cube/string_32.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm \
+ /Users/andrewdu/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm \
  jni/com_googlecode_tesseract_android/src/cube/word_altlist.h \
  jni/com_googlecode_tesseract_android/src/cube/altlist.h \
  jni/com_googlecode_tesseract_android/src/cube/cube_utils.h \
@@ -91,7 +91,7 @@ obj/local/mips/objs/tess/src/ccmain/cube_control.o: \
  jni/com_googlecode_tesseract_android/src/ccutil/tprintf.h \
  jni/com_googlecode_tesseract_android/src/ccutil/params.h \
  jni/com_googlecode_tesseract_android/src/ccutil/genericvector.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/assert.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/assert.h \
  jni/com_googlecode_tesseract_android/src/ccutil/tesscallback.h \
  jni/com_googlecode_tesseract_android/src/ccutil/errcode.h \
  jni/com_googlecode_tesseract_android/src/ccutil/helpers.h \
@@ -169,7 +169,7 @@ obj/local/mips/objs/tess/src/ccmain/cube_control.o: \
  jni/com_googlecode_tesseract_android/src/ccutil/ccutil.h \
  jni/com_googlecode_tesseract_android/src/ccutil/ambigs.h \
  jni/com_googlecode_tesseract_android/src/ccutil/tessdatamanager.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/semaphore.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/semaphore.h \
  jni/com_googlecode_tesseract_android/src/cutil/oldlist.h \
  jni/com_googlecode_tesseract_android/src/cutil/cutil.h \
  jni/com_googlecode_tesseract_android/src/cutil/cutil_class.h \
@@ -210,9 +210,9 @@ obj/local/mips/objs/tess/src/ccmain/cube_control.o: \
  jni/com_googlecode_tesseract_android/src/textord/bbgrid.h \
  jni/com_googlecode_tesseract_android/src/ccstruct/coutln.h \
  jni/com_googlecode_tesseract_android/src/ccutil/hashfn.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_map \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_set \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/memory \
+ /Users/andrewdu/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_map \
+ /Users/andrewdu/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_set \
+ /Users/andrewdu/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/memory \
  jni/com_googlecode_tesseract_android/src/ccstruct/rect.h \
  jni/com_googlecode_tesseract_android/src/ccstruct/blobbox.h \
  jni/com_googlecode_tesseract_android/src/ccstruct/statistc.h \
@@ -256,101 +256,101 @@ obj/local/mips/objs/tess/src/ccmain/cube_control.o: \
  jni/com_googlecode_tesseract_android/src/cutil/callcpp.h \
  jni/com_googlecode_tesseract_android/src/ccmain/tesseract_cube_combiner.h
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/ctype.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/ctype.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/cdefs.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/cdefs.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/cdefs_elf.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/cdefs_elf.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/android/api-level.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/android/api-level.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/unistd.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/unistd.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/stdint.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/stdint.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/_types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/_types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/_types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/_types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/posix_types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/posix_types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/stddef.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/stddef.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/compiler.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/compiler.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/posix_types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/posix_types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/sgidefs.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/sgidefs.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/kernel.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/kernel.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/sysmacros.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/sysmacros.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/select.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/select.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/time.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/time.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/time.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/time.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/signal.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/signal.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/limits.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/limits.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/limits.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/limits.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/limits.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/limits.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/internal_types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/internal_types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/limits.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/machine/limits.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/syslimits.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/syslimits.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/page.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/page.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/string.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/string.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/malloc.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/malloc.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/signal.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/signal.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm-generic/signal.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm-generic/signal.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/sigcontext.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/sigcontext.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/siginfo.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm/siginfo.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm-generic/siginfo.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/asm-generic/siginfo.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/ucontext.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/ucontext.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/user.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/user.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/sysconf.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/sys/sysconf.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/capability.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/linux/capability.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/pathconf.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/pathconf.h:
 
 jni/com_googlecode_leptonica_android/src/src/allheaders.h:
 
 jni/com_googlecode_leptonica_android/src/src/alltypes.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/stdio.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/stdio.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/stdlib.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/stdlib.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/alloca.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/alloca.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/strings.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/strings.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/memory.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/memory.h:
 
 jni/com_googlecode_leptonica_android/src/src/environ.h:
 
@@ -400,7 +400,7 @@ jni/com_googlecode_tesseract_android/src/cube/cube_object.h:
 
 jni/com_googlecode_tesseract_android/src/cube/char_samp.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/string:
+/Users/andrewdu/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/string:
 
 jni/com_googlecode_tesseract_android/src/cube/bmp_8.h:
 
@@ -410,7 +410,7 @@ jni/com_googlecode_tesseract_android/src/cube/cached_file.h:
 
 jni/com_googlecode_tesseract_android/src/cube/string_32.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm:
+/Users/andrewdu/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm:
 
 jni/com_googlecode_tesseract_android/src/cube/word_altlist.h:
 
@@ -438,7 +438,7 @@ jni/com_googlecode_tesseract_android/src/ccutil/params.h:
 
 jni/com_googlecode_tesseract_android/src/ccutil/genericvector.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/assert.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/assert.h:
 
 jni/com_googlecode_tesseract_android/src/ccutil/tesscallback.h:
 
@@ -594,7 +594,7 @@ jni/com_googlecode_tesseract_android/src/ccutil/ambigs.h:
 
 jni/com_googlecode_tesseract_android/src/ccutil/tessdatamanager.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/semaphore.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-9/arch-mips/usr/include/semaphore.h:
 
 jni/com_googlecode_tesseract_android/src/cutil/oldlist.h:
 
@@ -676,11 +676,11 @@ jni/com_googlecode_tesseract_android/src/ccstruct/coutln.h:
 
 jni/com_googlecode_tesseract_android/src/ccutil/hashfn.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_map:
+/Users/andrewdu/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_map:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_set:
+/Users/andrewdu/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_set:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/memory:
+/Users/andrewdu/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/memory:
 
 jni/com_googlecode_tesseract_android/src/ccstruct/rect.h:
 

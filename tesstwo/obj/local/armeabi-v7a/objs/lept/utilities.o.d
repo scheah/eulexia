@@ -1,32 +1,32 @@
 obj/local/armeabi-v7a/objs/lept/utilities.o: \
  jni/com_googlecode_leptonica_android/utilities.cpp \
  jni/com_googlecode_leptonica_android/common.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/jni.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/cdefs.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/android/api-level.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/assert.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/jni.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/cdefs.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/android/api-level.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/assert.h \
  jni/com_googlecode_leptonica_android/src/src/allheaders.h \
  jni/com_googlecode_leptonica_android/src/src/alltypes.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/stdio.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/stdint.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/_types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/machine/_types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/posix_types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/stddef.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/compiler.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/asm/posix_types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/asm/types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/types.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/machine/kernel.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/stdlib.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/string.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/malloc.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/alloca.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/strings.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/memory.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/stdio.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/stdint.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/_types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/machine/_types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/posix_types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/stddef.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/compiler.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/asm/posix_types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/asm/types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/types.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/machine/kernel.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/stdlib.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/string.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/malloc.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/alloca.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/strings.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/memory.h \
  jni/com_googlecode_leptonica_android/src/src/environ.h \
  jni/com_googlecode_leptonica_android/src/src/array.h \
  jni/com_googlecode_leptonica_android/src/src/bbuffer.h \
@@ -49,66 +49,66 @@ obj/local/armeabi-v7a/objs/lept/utilities.o: \
  jni/com_googlecode_leptonica_android/src/src/stringcode.h \
  jni/com_googlecode_leptonica_android/src/src/sudoku.h \
  jni/com_googlecode_leptonica_android/src/src/watershed.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/android/log.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/asm/byteorder.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/byteorder/little_endian.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/byteorder/swab.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/byteorder/generic.h \
- C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/android/bitmap.h
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/android/log.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/asm/byteorder.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/byteorder/little_endian.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/byteorder/swab.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/byteorder/generic.h \
+ /Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/android/bitmap.h
 
 jni/com_googlecode_leptonica_android/common.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/jni.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/jni.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/cdefs.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/cdefs.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/android/api-level.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/android/api-level.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/assert.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/assert.h:
 
 jni/com_googlecode_leptonica_android/src/src/allheaders.h:
 
 jni/com_googlecode_leptonica_android/src/src/alltypes.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/stdio.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/stdio.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/stdint.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/stdint.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/_types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/_types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/machine/_types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/machine/_types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/posix_types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/posix_types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/stddef.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/stddef.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/compiler.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/compiler.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/asm/posix_types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/asm/posix_types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/asm/types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/asm/types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/types.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/types.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/machine/kernel.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/machine/kernel.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/stdlib.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/stdlib.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/string.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/string.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/malloc.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/malloc.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/alloca.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/alloca.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/strings.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/strings.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/memory.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/memory.h:
 
 jni/com_googlecode_leptonica_android/src/src/environ.h:
 
@@ -154,14 +154,14 @@ jni/com_googlecode_leptonica_android/src/src/sudoku.h:
 
 jni/com_googlecode_leptonica_android/src/src/watershed.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/android/log.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/android/log.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/asm/byteorder.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/asm/byteorder.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/byteorder/little_endian.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/byteorder/little_endian.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/byteorder/swab.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/byteorder/swab.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/byteorder/generic.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/linux/byteorder/generic.h:
 
-C:/Users/Sebastian/Downloads/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/android/bitmap.h:
+/Users/andrewdu/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/android/bitmap.h:
