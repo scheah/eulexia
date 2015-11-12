@@ -7,4 +7,5 @@
 /build
 /captures
 /OpenCVLibrary300/build
+/tesstwo/build
 *.iml
