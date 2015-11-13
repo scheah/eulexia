@@ -79,6 +79,9 @@ public class SuggestionActivity extends Activity {
             }
         });
         setContentView(mCardScroller);
+
+        Bundle params = getIntent().getExtras();
+        String word = params.getString("word"); // TODO generate suggestions and display
     }
 
     @Override
