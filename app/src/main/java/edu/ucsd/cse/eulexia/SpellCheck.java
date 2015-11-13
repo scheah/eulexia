@@ -26,13 +26,13 @@ import android.content.res.AssetManager;
 public class SpellCheck implements SpellCheckListener {
     private static SpellCheck instance = null; // singleton, we do not want to keep re-reading a dictionary
     private static String dictFile = "english.txt";
-    private SpellChecker jazzySpellCheck = null;
-    private String originalText;
-    public ArrayList<String> misspelledWords = new ArrayList<String>();
-    public HashMap<String, ArrayList<String> > suggestions = new HashMap<String, ArrayList<String>>();
+    private static SpellChecker jazzySpellCheck = null;
+    private String mOriginalText = null;
+    private ArrayList<String> mMisspelledWords = new ArrayList<String>();
+    private HashMap<String, ArrayList<String> > mSuggestions = new HashMap<String, ArrayList<String>>();
 
     protected SpellCheck(Context context/*, String bodyText*/) {
-        //originalText = bodyText;
+        //mOriginalText = bodyText;
         AssetManager assetManager = context.getAssets();
         InputStream inputStream = null;
         SpellDictionary dictionary = null;
@@ -56,9 +56,9 @@ public class SpellCheck implements SpellCheckListener {
     }
 
     public void checkWords(String bodyText) {
-        misspelledWords.clear();
-        suggestions.clear();
-        originalText = bodyText;
+        mMisspelledWords.clear();
+        mSuggestions.clear();
+        mOriginalText = bodyText;
         jazzySpellCheck.checkSpelling(new StringWordTokenizer(bodyText));
     }
 
@@ -66,16 +66,28 @@ public class SpellCheck implements SpellCheckListener {
         String invalidWord = event.getInvalidWord();
         List suggestionsList = event.getSuggestions();
         //System.out.println("Invalid Word: " + event.getInvalidWord());
-        if (suggestions.containsKey(invalidWord)) // if we already recorded this misspell previously, exit
+        if (mSuggestions.containsKey(invalidWord)) // if we already recorded this misspell previously, exit
             return;
-        misspelledWords.add(event.getInvalidWord());
+        mMisspelledWords.add(event.getInvalidWord());
         ArrayList suggestionsForWord = new ArrayList<String>();
         for (Iterator suggestedWord = suggestionsList.iterator(); suggestedWord.hasNext();) {
             String currentSuggestion = (String) suggestedWord.next();
             suggestionsForWord.add(currentSuggestion);
             //System.out.println("\tSuggested Word: " + currentSuggestion);
         }
-        suggestions.put(invalidWord, suggestionsForWord);
+        mSuggestions.put(invalidWord, suggestionsForWord);
 
+    }
+
+    public int getNumMisspelledWords() {
+        return mMisspelledWords.size();
+    }
+
+    public int getNumSuggestions(String invalidWord) {
+        ArrayList suggestions = mSuggestions.get(invalidWord);
+        if (suggestions != null) {
+            return suggestions.size();
+        }
+        return 0;
     }
 }
