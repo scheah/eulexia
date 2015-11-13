@@ -2,4 +2,6 @@
     <string name="app_name">eulexia</string>
     <string name="title_activity_main">Hello World Immersion</string>
     <string name="hello_world">Hello world  blh!</string>
+    <string name="title_activity_spellcheck">SpellcheckActivity</string>
+    <string name="title_activity_suggestion">SuggestionActivity</string>
 </resources>

@@ -24,6 +24,16 @@
                 android:name="com.google.android.glass.VoiceTrigger"
                 android:resource="@xml/voice_trigger" />
         </activity>
+        <activity
+            android:name=".SpellcheckActivity"
+            android:icon="@drawable/ic_glass_logo"
+            android:label="@string/title_activity_spellcheck" >
+        </activity>
+        <activity
+            android:name=".SuggestionActivity"
+            android:icon="@drawable/ic_glass_logo"
+            android:label="@string/title_activity_suggestion" >
+        </activity>
     </application>
 
 </manifest>
