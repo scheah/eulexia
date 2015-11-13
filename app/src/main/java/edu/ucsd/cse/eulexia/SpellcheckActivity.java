@@ -97,13 +97,15 @@ public class SpellCheckActivity extends Activity {
 
                 switch (position) {
                     case WORD0:
-                        params.putString("word", "tapoica"); // TODO replace with real params
+                        // Pass word to SuggestionActivity
+                        params.putString("word", "tapoica");
                         intent.putExtras(params);
                         startActivity(intent);
                         finish();
                         break;
                     case WORD1:
-                        params.putString("word", "galery"); // TODO replace with real params
+                        // Pass word to SuggestionActivity
+                        params.putString("word", "galery");
                         intent.putExtras(params);
                         startActivity(intent);
                         finish();

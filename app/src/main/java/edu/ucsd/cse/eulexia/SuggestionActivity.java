@@ -11,7 +11,6 @@ import com.google.android.glass.widget.CardScrollView;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -44,12 +43,16 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     private boolean initialized = false;
     private String queuedText;
 
-    // Index of misspelled words.
+    // Index of spelling suggestion
     // TODO: Create queue of misspelled words and cases for each. Currently, there is a hardcoded case example.
     // Visible for testing.
+
+    // Suggestion array indices
     static final int SUGG0 = 0;
     static final int SUGG1 = 1;
     static final int SUGG2 = 2;
+
+    // Array of suggested spellings
     private String[] suggArray = new String[3];
 
     private CardScrollAdapter mAdapter;
@@ -76,10 +79,12 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
+        // Retrieve saved word from SpellCheckActivity to create array of suggestions
         Bundle b = getIntent().getExtras();
         String w = b.getString("word");
         createSuggArray(w);
 
+        // Create cards
         mAdapter = new CardAdapter(createCards(this));
         mCardScroller = new CardScrollView(this);
         mCardScroller.setAdapter(mAdapter);
@@ -93,7 +98,7 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     }
 
     /**
-     * Create list of misspelled words.
+     * Create list of spelling suggestions.
      */
     private List<CardBuilder> createCards(Context context) {
         ArrayList<CardBuilder> cards = new ArrayList<CardBuilder>();
@@ -107,10 +112,6 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
                 .setText(suggArray[SUGG2])
                 .setFootnote(R.string.suggestion_card_menu_description));
         return cards;
-
-     /*   Bundle params = getIntent().getExtras();
-        String word = params.getString("word"); // TODO generate suggestions and display*/
-
     }
 
     @Override
@@ -154,6 +155,7 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
         super.onPause();
     }
 
+    // Insert spaces after every letter in the string
     private void spellWordAt(int index) {
         speak(suggArray[index].replace("", " ").trim());
     }
