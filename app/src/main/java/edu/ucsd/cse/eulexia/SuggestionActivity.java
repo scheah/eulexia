@@ -66,6 +66,10 @@ public class SuggestionActivity extends Activity {
                 .setText("typical")
                 .setFootnote(R.string.suggestion_card_menu_description));
         return cards;
+
+     /*   Bundle params = getIntent().getExtras();
+        String word = params.getString("word"); // TODO generate suggestions and display*/
+
     }
 
     @Override
