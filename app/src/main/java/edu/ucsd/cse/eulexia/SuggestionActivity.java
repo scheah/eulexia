@@ -50,7 +50,7 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     static final int SUGG0 = 0;
     static final int SUGG1 = 1;
     static final int SUGG2 = 2;
-    private String[] suggArray = {"tapioca", "typical", "topical"};
+    private String[] suggArray = new String[3];
 
     private CardScrollAdapter mAdapter;
     private CardScrollView mCardScroller;
@@ -60,9 +60,25 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
         return mCardScroller;
     }
 
+    private void createSuggArray(String word) {
+        if (word.equals("tapoica")){
+            suggArray[0] = "tapioca";
+            suggArray[1] = "typical";
+            suggArray[2] = "topical";
+        } else if(word.equals("galery")){
+            suggArray[0] = "gallery";
+            suggArray[1] = "glory";
+            suggArray[2] = "gale";
+        }
+    }
+
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+
+        Bundle b = getIntent().getExtras();
+        String w = b.getString("word");
+        createSuggArray(w);
 
         mAdapter = new CardAdapter(createCards(this));
         mCardScroller = new CardScrollView(this);

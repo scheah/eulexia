@@ -91,18 +91,23 @@ public class SpellCheckActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG, "Clicked view at position " + position + ", row-id " + id);
                 int soundEffect = Sounds.TAP;
-                switch (position) {
-//                    case CARD_BUILDER:
-//                        startActivity(new Intent(ApiDemoActivity.this, CardBuilderActivity.class));
-//                        break;
 
+                final Intent intent = new Intent(SpellCheckActivity.this, SuggestionActivity.class);
+                Bundle params = new Bundle();
+
+                switch (position) {
                     case WORD0:
-                        startActivity(new Intent(SpellCheckActivity.this, SuggestionActivity.class));
+                        params.putString("word", "tapoica"); // TODO replace with real params
+                        intent.putExtras(params);
+                        startActivity(intent);
+                        finish();
                         break;
                     case WORD1:
-                        startActivity(new Intent(SpellCheckActivity.this, SuggestionActivity.class));
+                        params.putString("word", "galery"); // TODO replace with real params
+                        intent.putExtras(params);
+                        startActivity(intent);
+                        finish();
                         break;
-
                     default:
                         soundEffect = Sounds.ERROR;
                         Log.d(TAG, "Don't show anything");
