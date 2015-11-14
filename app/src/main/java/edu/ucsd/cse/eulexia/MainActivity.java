@@ -11,6 +11,7 @@ import com.google.android.glass.touchpad.*;
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +22,26 @@ import android.graphics.Typeface;
 import android.view.KeyEvent;
 import android.util.Log;
 import android.provider.MediaStore;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.FileObserver;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+
 
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
@@ -61,16 +78,6 @@ public class MainActivity extends Activity {
             return super.onKeyDown(keyCode, event);
         }
     }
-
-//    protected void startCameraActivity() {
-//        File file = new File(_path);
-//        Uri outputFileUri = Uri.fromFile(file);
-//
-//        final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-//
-//        startActivityForResult(intent, 0);
-//    }
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -140,23 +147,6 @@ public class MainActivity extends Activity {
     }
 
 
-// Changes font, commented out for now
-//    private View buildView() {
-//        View view = new CardBuilder(this, CardBuilder.Layout.EMBED_INSIDE)
-//                .setEmbeddedLayout(R.layout.test)
-//                .setFootnote("Foods you tracked")
-//                .setTimestamp("today")
-//                .getView();
-//
-//        TextView textView1 = (TextView) view.findViewById(R.id.textView);
-//        Typeface tf = Typeface.createFromAsset(getAssets(),
-//                "fonts/bookmanoldstyle.ttf");
-//        textView1.setTypeface(tf);
-//        textView1.setText("Water");
-//
-//        return view;
-//    }
-
     ////////////////////// GESTURES ///////////////////////////////
     @Override
     public boolean onGenericMotionEvent(MotionEvent event) {
@@ -168,8 +158,8 @@ public class MainActivity extends Activity {
 
 
 
-    //
 
+    ////////////////////// PICTURE PROCESSING ///////////////////////////////
     private static final int TAKE_PICTURE_REQUEST = 1;
 
     private void takePicture() {
@@ -182,11 +172,11 @@ public class MainActivity extends Activity {
         if (requestCode == TAKE_PICTURE_REQUEST && resultCode == RESULT_OK) {
             String thumbnailPath = data.getStringExtra(Intents.EXTRA_THUMBNAIL_FILE_PATH);
             String picturePath = data.getStringExtra(Intents.EXTRA_PICTURE_FILE_PATH);
-
+            Log.d("OCR", "the picture will be saved to: " + picturePath);
             processPictureWhenReady(picturePath);
             // TODO: Show the thumbnail to the user while the full picture is being
             // processed.
-            Log.d("PICTURE DONE", picturePath);
+
         }
 
         super.onActivityResult(requestCode, resultCode, data);
@@ -197,6 +187,10 @@ public class MainActivity extends Activity {
 
         if (pictureFile.exists()) {
             // The picture is ready; process it.
+            // SEBTEST: DO OCR HERE
+            Log.d("OCR", "Picture ready");
+            new OCRRequest().execute(picturePath);
+
         } else {
             // The file does not exist yet. Before starting the file observer, you
             // can update your UI to let the user know that the application is
@@ -249,7 +243,6 @@ public class MainActivity extends Activity {
                 Log.e("tag", gesture.name());
                 if (gesture == Gesture.TAP) {
                     // do something on tap
-                    return true;
                 } else if (gesture == Gesture.TWO_TAP) {
                     // take picture and do OCR
                     return true;
@@ -266,5 +259,57 @@ public class MainActivity extends Activity {
         });
 
         return gestureDetector;
+    }
+
+}
+
+class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, String/*result*/> {
+    private String url="https://ocr.a9t9.com/api/Parse/Image";
+
+    @Override
+    protected String doInBackground(String... uri) {
+        Log.d("OCR", "performing http POST with picture " + uri[0]);
+        // uri[0] will contain the picture path
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost(url);
+        HttpResponse response;
+        String responseString = null;
+        MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+        builder.addTextBody("apiKey", "helloworld", ContentType.TEXT_PLAIN);
+        builder.addBinaryBody("file", new File(uri[0]), ContentType.APPLICATION_OCTET_STREAM, uri[0].substring(uri[0].lastIndexOf("/") + 1));
+        builder.addTextBody("language", "eng", ContentType.TEXT_PLAIN);
+        HttpEntity multipart = builder.build();
+        httpPost.setEntity(multipart);
+
+        try {
+            response = httpclient.execute(httpPost);
+            StatusLine statusLine = response.getStatusLine();
+            if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                response.getEntity().writeTo(out);
+                responseString = out.toString();
+                Log.d("OCR", "response: " + out);
+                out.close();
+            } else{
+                //Closes the connection.
+                Log.d("OCR", "BAD response: " + statusLine.getReasonPhrase());
+                response.getEntity().getContent().close();
+                throw new IOException(statusLine.getReasonPhrase());
+            }
+        } catch (ClientProtocolException e) {
+            //TODO Handle problems..
+            Log.d("OCR", e.getMessage());
+        } catch (IOException e) {
+            //TODO Handle problems..
+            Log.d("OCR", e.getMessage());
+        }
+        return responseString;
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+        //Do anything with response..
+        Log.d("OCR", "Implement a transition here?");
     }
 }
