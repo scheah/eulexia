@@ -26,9 +26,9 @@ import java.util.List;
  * Created by michelleawu on 11/12/15.
  * Creates a card scroll view containing all misspelled words.
  */
-public class SpellCheckActivity extends Activity {
+public class SpellcheckActivity extends Activity {
 
-    private static final String TAG = SpellCheckActivity.class.getSimpleName();
+    private static final String TAG = SpellcheckActivity.class.getSimpleName();
 
     // Index of misspelled words.
     // TODO: Create queue of misspelled words and cases for each. Currently, there is a hardcoded case example.
@@ -92,7 +92,7 @@ public class SpellCheckActivity extends Activity {
                 Log.d(TAG, "Clicked view at position " + position + ", row-id " + id);
                 int soundEffect = Sounds.TAP;
 
-                final Intent intent = new Intent(SpellCheckActivity.this, SuggestionActivity.class);
+                final Intent intent = new Intent(SpellcheckActivity.this, SuggestionActivity.class);
                 Bundle params = new Bundle();
 
                 switch (position) {

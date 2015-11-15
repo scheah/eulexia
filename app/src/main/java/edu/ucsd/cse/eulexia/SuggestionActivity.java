@@ -33,7 +33,7 @@ import java.util.Locale;
  */
 public class SuggestionActivity extends Activity implements TextToSpeech.OnInitListener, GestureDetector.BaseListener {
 
-    private static final String TAG = SpellCheckActivity.class.getSimpleName();
+    private static final String TAG = SpellcheckActivity.class.getSimpleName();
 
     // Gesture detection
     private GestureDetector mGestureDetector;
