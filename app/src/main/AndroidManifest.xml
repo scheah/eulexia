@@ -25,5 +25,5 @@
                 android:resource="@xml/voice_trigger" />
         </activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
