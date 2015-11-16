@@ -34,4 +34,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':openCVLibrary300')
+    compile files('libs/jazzy0-2-1.jar')
 }

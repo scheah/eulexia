@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,6 +30,7 @@ import java.util.List;
 public class SpellcheckActivity extends Activity {
 
     private static final String TAG = SpellcheckActivity.class.getSimpleName();
+    private static final String TAG2 = "Spellz";
 
     // Index of misspelled words.
     // TODO: Create queue of misspelled words and cases for each. Currently, there is a hardcoded case example.
@@ -38,6 +40,7 @@ public class SpellcheckActivity extends Activity {
 
     private CardScrollAdapter mAdapter;
     private CardScrollView mCardScroller;
+    private SpellCheck mSpellChecker;
 
     // Visible for testing.
     CardScrollView getScroller() {
@@ -53,6 +56,8 @@ public class SpellcheckActivity extends Activity {
         mCardScroller.setAdapter(mAdapter);
         setContentView(mCardScroller);
         setCardScrollerListener();
+        mSpellChecker = SpellCheck.getInstance(getApplicationContext());
+        Log.d(TAG2, "Done loading Jazzy");
     }
 
     /**
@@ -104,10 +109,20 @@ public class SpellcheckActivity extends Activity {
                         finish();
                         break;
                     case WORD1:
+                        Log.d(TAG2, "Spelling check for galery");
                         // Pass word to SuggestionActivity
                         params.putString("word", "galery");
                         intent.putExtras(params);
                         startActivity(intent);
+                        mSpellChecker.checkWords("galery");
+                        for (String member : mSpellChecker.getMisspelledWords()){
+                            Log.d(TAG2, member);
+                        }
+                        Log.d(TAG2, "Suggestion check for galery");
+                        for (String member : mSpellChecker.getSuggestionsForWord("galery")){
+                            Log.d(TAG2, member);
+                        }
+
                         finish();
                         break;
                     default:
