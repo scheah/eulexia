@@ -36,6 +36,7 @@ import java.util.Locale;
 public class SuggestionActivity extends Activity implements TextToSpeech.OnInitListener, GestureDetector.BaseListener {
 
     private static final String TAG = SpellcheckActivity.class.getSimpleName();
+    private static final String TAG2 = "Spellz";
 
     // Gesture detection
     private GestureDetector mGestureDetector;
@@ -146,7 +147,7 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TAG, "Clicked view at position " + position + ", row-id " + id);
+                Log.d(TAG2, "Clicked view at position " + position + ", row-id " + id);
                 int soundEffect = Sounds.TAP;
 
                 // On tap, play audio spelling

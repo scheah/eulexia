@@ -50,8 +50,8 @@ public class SpellcheckActivity extends Activity {
         super.onCreate(bundle);
 
         // TODO: Fill msWords with words recognized via OCR
-        msWords.add("finaly");
         msWords.add("galery");
+        msWords.add("finaly");
 
         mAdapter = new CardAdapter(createCards(this));
         mCardScroller = new CardScrollView(this);
@@ -72,6 +72,7 @@ public class SpellcheckActivity extends Activity {
             cards.add(i, new CardBuilder(context, CardBuilder.Layout.MENU)
                     .setText(word)
                     .setFootnote(R.string.misspelled_card_menu_description));
+            i++;
         }
         return cards;
     }
@@ -97,6 +98,7 @@ public class SpellcheckActivity extends Activity {
 
         // Pass suggested words to SuggestionActivity
         _params.putStringArrayList("suggestions", mSpellChecker.getSuggestionsForWord(currWord));
+
         _intent.putExtras(_params);
         startActivity(_intent);
 
@@ -111,7 +113,7 @@ public class SpellcheckActivity extends Activity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TAG, "Clicked view at position " + position + ", row-id " + id);
+                Log.d(TAG2, "Clicked view at position " + position + ", row-id " + id);
                 int soundEffect = Sounds.TAP;
 
                 final Intent intent = new Intent(SpellcheckActivity.this, SuggestionActivity.class);
