@@ -45,14 +45,6 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     private boolean initialized = false;
     private String queuedText;
 
-    // Index of spelling suggestion
-    // Visible for testing.
-
-    // Suggestion array indices
-    static final int SUGG0 = 0;
-    static final int SUGG1 = 1;
-    static final int SUGG2 = 2;
-
     // ArrayList of suggested spellings
     ArrayList<String> suggList = new ArrayList<String>();
 
@@ -90,16 +82,13 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
      */
     private List<CardBuilder> createCards(Context context) {
         ArrayList<CardBuilder> cards = new ArrayList<CardBuilder>();
-
         int i = 0;
-
         for(String word : suggList){
             cards.add(i, new CardBuilder(context, CardBuilder.Layout.MENU)
             .setText(word)
-            .setFootnote("Tap to hear spelling"));
+            .setFootnote(R.string.suggestion_card_menu_description));
             i++;
         }
-
         return cards;
     }
 

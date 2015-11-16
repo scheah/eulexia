@@ -31,13 +31,10 @@ public class SpellcheckActivity extends Activity {
 
     private static final String TAG = SpellcheckActivity.class.getSimpleName();
     private static final String TAG2 = "Spellz";
-    private static final ArrayList<String> msWords = new ArrayList<String>();
 
-    // Index of misspelled words.
-    // TODO: Create queue of misspelled words and cases for each. Currently, there is a hardcoded case example.
-    // Visible for testing.
-    static final int WORD0 = 0;
-    static final int WORD1 = 1;
+
+    // List of misspelled words.
+    private static final ArrayList<String> msWords = new ArrayList<String>();
 
     private CardScrollAdapter mAdapter;
     private CardScrollView mCardScroller;
@@ -52,6 +49,7 @@ public class SpellcheckActivity extends Activity {
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
+        // TODO: Fill msWords with words recognized via OCR
         msWords.add("finaly");
         msWords.add("galery");
 
@@ -69,12 +67,12 @@ public class SpellcheckActivity extends Activity {
      */
     private List<CardBuilder> createCards(Context context) {
         ArrayList<CardBuilder> cards = new ArrayList<CardBuilder>();
-        cards.add(WORD0, new CardBuilder(context, CardBuilder.Layout.MENU)
-                .setText(msWords.get(WORD0))
-                .setFootnote(R.string.misspelled_card_menu_description));
-        cards.add(WORD1, new CardBuilder(context, CardBuilder.Layout.MENU)
-                .setText(msWords.get(WORD1))
-                .setFootnote(R.string.misspelled_card_menu_description));
+        int i = 0;
+        for(String word : msWords) {
+            cards.add(i, new CardBuilder(context, CardBuilder.Layout.MENU)
+                    .setText(word)
+                    .setFootnote(R.string.misspelled_card_menu_description));
+        }
         return cards;
     }
 
