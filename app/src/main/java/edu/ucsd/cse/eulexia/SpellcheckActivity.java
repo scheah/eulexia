@@ -139,12 +139,6 @@ public class SpellcheckActivity extends Activity {
             public boolean onGesture(Gesture gesture) {
                 Log.e("tag", gesture.name());
                 if (gesture == Gesture.TAP) {
-                    // go to suggestions
-                    Bundle params = new Bundle();
-                    params.putString("word", "misspled"); // TODO replace with real params
-                    intent.putExtras(params);
-                    startActivity(intent);
-                    finish();
                     return true;
                 } else if (gesture == Gesture.SWIPE_RIGHT) {
                     // go to next word
