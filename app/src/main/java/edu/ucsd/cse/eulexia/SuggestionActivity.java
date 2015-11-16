@@ -1,5 +1,6 @@
 package edu.ucsd.cse.eulexia;
 
+import com.google.android.glass.app.Card;
 import com.google.android.glass.media.Sounds;
 import edu.ucsd.cse.eulexia.card.CardAdapter;
 
@@ -18,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +46,6 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     private String queuedText;
 
     // Index of spelling suggestion
-    // TODO: Create queue of misspelled words and cases for each. Currently, there is a hardcoded case example.
     // Visible for testing.
 
     // Suggestion array indices
@@ -52,8 +53,8 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     static final int SUGG1 = 1;
     static final int SUGG2 = 2;
 
-    // Array of suggested spellings
-    private String[] suggArray = new String[3];
+    // ArrayList of suggested spellings
+    ArrayList<String> suggList = new ArrayList<String>();
 
     private CardScrollAdapter mAdapter;
     private CardScrollView mCardScroller;
@@ -63,26 +64,13 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
         return mCardScroller;
     }
 
-    private void createSuggArray(String word) {
-        if (word.equals("tapoica")){
-            suggArray[0] = "tapioca";
-            suggArray[1] = "typical";
-            suggArray[2] = "topical";
-        } else if(word.equals("galery")){
-            suggArray[0] = "gallery";
-            suggArray[1] = "glory";
-            suggArray[2] = "gale";
-        }
-    }
-
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
-        // Retrieve saved word from SpellCheckActivity to create array of suggestions
+        // Retrieve saved suggestions from SpellCheckActivity
         Bundle b = getIntent().getExtras();
-        String w = b.getString("word");
-        createSuggArray(w);
+        suggList = b.getStringArrayList("suggestions");
 
         // Create cards
         mAdapter = new CardAdapter(createCards(this));
@@ -102,15 +90,16 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
      */
     private List<CardBuilder> createCards(Context context) {
         ArrayList<CardBuilder> cards = new ArrayList<CardBuilder>();
-        cards.add(SUGG0, new CardBuilder(context, CardBuilder.Layout.MENU)
-                .setText(suggArray[SUGG0])
-                .setFootnote(R.string.suggestion_card_menu_description));
-        cards.add(SUGG1, new CardBuilder(context, CardBuilder.Layout.MENU)
-                .setText(suggArray[SUGG1])
-                .setFootnote(R.string.suggestion_card_menu_description));
-        cards.add(SUGG2, new CardBuilder(context, CardBuilder.Layout.MENU)
-                .setText(suggArray[SUGG2])
-                .setFootnote(R.string.suggestion_card_menu_description));
+
+        int i = 0;
+
+        for(String word : suggList){
+            cards.add(i, new CardBuilder(context, CardBuilder.Layout.MENU)
+            .setText(word)
+            .setFootnote("Tap to hear spelling"));
+            i++;
+        }
+
         return cards;
     }
 
@@ -157,7 +146,7 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
 
     // Insert spaces after every letter in the string
     private void spellWordAt(int index) {
-        speak(suggArray[index].replace("", " ").trim());
+        speak(suggList.get(index).replace("", " ").trim());
     }
 
     /**
@@ -172,22 +161,10 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
                 int soundEffect = Sounds.TAP;
 
                 // On tap, play audio spelling
-                switch (position) {
-                    case SUGG0:
-                        spellWordAt(SUGG0);
-                        break;
-                    case SUGG1:
-                        spellWordAt(SUGG1);
-                        //startActivity(new Intent(SuggestionActivity.this, SuggestionActivity.class));
-                        break;
-                    case SUGG2:
-                        spellWordAt(SUGG2);
-                        break;
+                spellWordAt(position);
 
-                    default:
-                        soundEffect = Sounds.ERROR;
-                        Log.d(TAG, "Don't show anything");
-                }
+                /*soundEffect = Sounds.ERROR;
+                Log.d(TAG, "Don't show anything");*/
 
                 // Play sound.
                 AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
