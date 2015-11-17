@@ -2,7 +2,6 @@ package edu.ucsd.cse.eulexia;
 
 import com.google.android.glass.media.Sounds;
 import edu.ucsd.cse.eulexia.card.CardAdapter;
-import edu.ucsd.cse.eulexia.SuggestionActivity;
 
 import com.google.android.glass.touchpad.Gesture;
 import com.google.android.glass.touchpad.GestureDetector;
@@ -19,9 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -49,10 +46,6 @@ public class SpellcheckActivity extends Activity {
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-
-        // TODO: Fill msWords with words recognized via OCR
-        //msWords.add("galery");
-        //msWords.add("finaly");
 
         // get data from OCRActivity
         Bundle b = getIntent().getExtras();
@@ -136,28 +129,5 @@ public class SpellcheckActivity extends Activity {
         });
     }
 
-    private GestureDetector createGestureDetector(Context context) {
-        GestureDetector gestureDetector = new GestureDetector(context);
-        final Intent intent = new Intent(context, SuggestionActivity.class);
 
-        //Create a base listener for generic gestures
-        gestureDetector.setBaseListener(new GestureDetector.BaseListener() {
-            @Override
-            public boolean onGesture(Gesture gesture) {
-                Log.e("tag", gesture.name());
-                if (gesture == Gesture.TAP) {
-                    return true;
-                } else if (gesture == Gesture.SWIPE_RIGHT) {
-                    // go to next word
-                    return true;
-                } else if (gesture == Gesture.SWIPE_LEFT) {
-                    // go to prev word
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        return gestureDetector;
-    }
 }
