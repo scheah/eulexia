@@ -45,7 +45,7 @@ public final class SliderActivity extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         mCardScroller = new CardScrollView(this);
-        mCardScroller.setAdapter(new CardAdapter(createCards(this)));
+        mCardScroller.setAdapter(new CardAdapter(createCards(this), getBaseContext()));
         mCardScroller.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

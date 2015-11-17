@@ -151,10 +151,20 @@ public class OCRActivity extends Activity {
      * Builds a Glass styled "Hello World!" view using the {@link CardBuilder} class.
      */
     private View buildView() {
-        CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);
+//        CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);
+//
+//        card.setText("take1");
+//        return card.getView();
 
-        card.setText("take1");
-        return card.getView();
+        View view = new CardBuilder(this, CardBuilder.Layout.EMBED_INSIDE)
+                .setEmbeddedLayout(R.layout.main_view)
+                .getView();
+
+        TextView textView1 = (TextView) view.findViewById(R.id.textView);
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "fonts/bookmanoldstyle.ttf");
+        textView1.setTypeface(tf);
+        return view;
     }
 
 
