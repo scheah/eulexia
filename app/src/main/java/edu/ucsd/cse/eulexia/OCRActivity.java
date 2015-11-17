@@ -31,6 +31,8 @@ import java.lang.reflect.Array;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -363,7 +365,22 @@ class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, Strin
         //Do anything with response..
         Log.d("OCR", "Implement a transition here?");
 
-        List<String> results = Arrays.asList(result.split(" "));
-        ocrActivity.transitionToSpellcheck(results, intent);
+        Pattern errorPattern = Pattern.compile("\"IsErroredOnProcessing\":(.*?),");
+        Matcher errorMatcher = errorPattern.matcher(result);
+
+        Pattern resPattern = Pattern.compile("\"ParsedText\":\"(.*?)\",");
+        Matcher resMatcher = resPattern.matcher(result);
+
+        if(errorMatcher.find() && (errorMatcher.group(1) == "true")) {
+            // error occured in parsing - handle it
+        }
+
+        if(resMatcher.find()) {
+            String res = resMatcher.group(1);
+            List<String> results = Arrays.asList(res.split(" "));
+            ocrActivity.transitionToSpellcheck(results, intent);
+        } else {
+            // text not found - show warning?
+        }
     }
 }
