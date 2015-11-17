@@ -54,7 +54,7 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
  *
  * @see <a href="https://developers.google.com/glass/develop/gdk/touch">GDK Developer Guide</a>
  */
-public class MainActivity extends Activity {
+public class OCRActivity extends Activity {
 
     /**
      * {@link CardScrollView} to use as the main content view.
@@ -202,7 +202,7 @@ public class MainActivity extends Activity {
             // SEBTEST: DO OCR HERE
             mProgressDialog.hide();
             Log.d("OCR", "Picture ready");
-            OCRRequest request = new OCRRequest(this);
+            OCRRequest request = new OCRRequest(this, getApplicationContext());
             request.execute(picturePath);
 
         } else {
@@ -273,19 +273,31 @@ public class MainActivity extends Activity {
         return gestureDetector;
     }
 
+    public void transitionToSpellcheck(String result, Intent intent) {
+        Bundle params = new Bundle();
+        params.putString("ocrResult", result);
+        intent.putExtras(params);
+        startActivity(intent);
+
+    }
 }
 
 class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, String/*result*/> {
     private String url="https://ocr.a9t9.com/api/Parse/Image";
     private ProgressDialog mProgressDialog;
+    private Intent intent;
+    private OCRActivity ocrActivity;
 
-    public OCRRequest(Activity activity) {
+    public OCRRequest(OCRActivity activity, Context context) {
         mProgressDialog = new ProgressDialog(activity);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setTitle("Loading...");
         mProgressDialog.setCancelable(false);
         mProgressDialog.setIndeterminate(false);
         mProgressDialog.setMax(100);
+
+        ocrActivity = activity;
+        intent = new Intent(context, SpellcheckActivity.class);
     }
 
     @Override
@@ -344,5 +356,6 @@ class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, Strin
         super.onPostExecute(result);
         //Do anything with response..
         Log.d("OCR", "Implement a transition here?");
+        ocrActivity.transitionToSpellcheck(result, intent);
     }
 }

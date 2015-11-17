@@ -36,7 +36,7 @@
             />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".OCRActivity"
             android:exported="true"
             />
     </application>
