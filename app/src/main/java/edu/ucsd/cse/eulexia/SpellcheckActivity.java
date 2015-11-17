@@ -92,15 +92,23 @@ public class SpellcheckActivity extends Activity {
         String currWord = msWords.get(index);
 
         // Check misspelled word
-        mSpellChecker.checkWords(currWord);
+        //mSpellChecker.checkWords(currWord);
+        boolean misspelled = mSpellChecker.checkWordSynchronous(currWord);
+        if(!misspelled) {
+            // handle this
+        }
+        else if(mSpellChecker.getSuggestionsForWord(currWord).size() == 0) {
+            // no suggestions, handle this
+        }
+        else {
+            // Pass suggested words to SuggestionActivity
+            _params.putStringArrayList("suggestions", mSpellChecker.getSuggestionsForWord(currWord));
 
-        // Pass suggested words to SuggestionActivity
-        _params.putStringArrayList("suggestions", mSpellChecker.getSuggestionsForWord(currWord));
+            _intent.putExtras(_params);
+            startActivity(_intent);
 
-        _intent.putExtras(_params);
-        startActivity(_intent);
-
-        finish();
+            //finish();
+        }
     }
 
     /**
