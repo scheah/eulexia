@@ -53,7 +53,7 @@ public class CardAdapter extends CardScrollAdapter {
         TextView textView1 = (TextView) view.findViewById(R.id.textView);
         Typeface tf = Typeface.createFromAsset(mContext.getAssets(),
                 "fonts/bookmanoldstyle.ttf");
-        textView1.setTypeface(tf);
+//        textView1.setTypeface(tf);
         if(msWords != null){
             textView1.setText(msWords.get(position));
         }
