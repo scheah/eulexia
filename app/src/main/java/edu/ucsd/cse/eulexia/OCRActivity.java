@@ -31,6 +31,8 @@ import java.lang.reflect.Array;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -47,6 +49,9 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
 
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
@@ -373,7 +378,19 @@ class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, Strin
         //Do anything with response..
         Log.d("OCR", "Implement a transition here?");
 
-        List<String> results = Arrays.asList(result.split(" "));
-        ocrActivity.transitionToSpellcheck(results, intent);
+        try {
+            JSONObject resObj = new JSONObject(result);
+            JSONArray parsedRes = new JSONArray(resObj.getString("ParsedResults"));
+            JSONObject parsedResults = parsedRes.getJSONObject(0);
+            if(resObj.getBoolean("IsErroredOnProcessing")) {
+                // error occured in parsing - handle it
+            }
+
+            String res = parsedResults.getString("ParsedText");
+            List<String> results = Arrays.asList(res.split(" \r\n"));
+            ocrActivity.transitionToSpellcheck(results, intent);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
