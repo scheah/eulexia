@@ -98,6 +98,7 @@ public class OCRActivity extends Activity {
         mView = buildView();
         mGestureDetector = createGestureDetector(this);
         mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.getWindow().addFlags( WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON );
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setTitle("Loading...");
         mProgressDialog.setCancelable(false);
@@ -312,6 +313,7 @@ class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, Strin
 
     public OCRRequest(OCRActivity activity, Context context) {
         mProgressDialog = new ProgressDialog(activity);
+        mProgressDialog.getWindow().addFlags( WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON );
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setTitle("Loading...");
         mProgressDialog.setCancelable(false);
