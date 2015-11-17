@@ -53,6 +53,9 @@ public class SpellcheckActivity extends Activity {
         msWords.add("galery");
         msWords.add("finaly");
 
+        // get data from OCRActivity
+        Bundle b = getIntent().getExtras();
+
         mAdapter = new CardAdapter(createCards(this));
         mCardScroller = new CardScrollView(this);
         mCardScroller.setAdapter(mAdapter);

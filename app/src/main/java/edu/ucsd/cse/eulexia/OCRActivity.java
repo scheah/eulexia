@@ -273,9 +273,9 @@ public class OCRActivity extends Activity {
         return gestureDetector;
     }
 
-    public void transitionToSpellcheck(String result, Intent intent) {
+    public void transitionToSpellcheck(String [] results, Intent intent) {
         Bundle params = new Bundle();
-        params.putString("ocrResult", result);
+        params.putStringArray("ocrResult", results);
         intent.putExtras(params);
         startActivity(intent);
 
@@ -356,6 +356,8 @@ class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, Strin
         super.onPostExecute(result);
         //Do anything with response..
         Log.d("OCR", "Implement a transition here?");
-        ocrActivity.transitionToSpellcheck(result, intent);
+
+        String [] results = result.split(" "); // split into array of words 
+        ocrActivity.transitionToSpellcheck(results, intent);
     }
 }
