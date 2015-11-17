@@ -384,10 +384,12 @@ class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, Strin
             JSONObject parsedResults = parsedRes.getJSONObject(0);
             if(resObj.getBoolean("IsErroredOnProcessing")) {
                 // error occured in parsing - handle it
+                return;
             }
 
             String res = parsedResults.getString("ParsedText");
-            List<String> results = Arrays.asList(res.split(" \r\n"));
+            res = res.replaceAll("[\n\r]", ""); // Get rid of escape characters
+            List<String> results = Arrays.asList(res.split(" "));
             ocrActivity.transitionToSpellcheck(results, intent);
         } catch (JSONException e) {
             e.printStackTrace();
