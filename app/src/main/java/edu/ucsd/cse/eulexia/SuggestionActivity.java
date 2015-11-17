@@ -66,7 +66,7 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
         suggList = b.getStringArrayList("suggestions");
 
         // Create cards
-        mAdapter = new CardAdapter(createCards(this));
+        mAdapter = new CardAdapter(createCards(this), getBaseContext());
         mCardScroller = new CardScrollView(this);
         mCardScroller.setAdapter(mAdapter);
         setContentView(mCardScroller);

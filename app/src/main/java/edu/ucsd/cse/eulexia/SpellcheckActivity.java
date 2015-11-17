@@ -51,7 +51,7 @@ public class SpellcheckActivity extends Activity {
         Bundle b = getIntent().getExtras();
         msWords = b.getStringArrayList("ocrResults");
 
-        mAdapter = new CardAdapter(createCards(this));
+        mAdapter = new CardAdapter(createCards(this), getBaseContext(), msWords);
         mCardScroller = new CardScrollView(this);
         mCardScroller.setAdapter(mAdapter);
         setContentView(mCardScroller);
@@ -67,8 +67,8 @@ public class SpellcheckActivity extends Activity {
         ArrayList<CardBuilder> cards = new ArrayList<CardBuilder>();
         int i = 0;
         for(String word : msWords) {
-            cards.add(i, new CardBuilder(context, CardBuilder.Layout.MENU)
-                    .setText(word)
+            cards.add(i, new CardBuilder(context, CardBuilder.Layout.EMBED_INSIDE)
+                    .setEmbeddedLayout(R.layout.main_view)
                     .setFootnote(R.string.misspelled_card_menu_description));
             i++;
         }
