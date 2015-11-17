@@ -41,5 +41,5 @@ dependencies {
     }
     compile 'org.apache.httpcomponents:httpclient-android:4.3.5'
     compile project(':openCVLibrary300')
-    compile files('libs/jazzy0-2-1.jar')
+    compile files('libs/jazzy-core.jar')
 }
