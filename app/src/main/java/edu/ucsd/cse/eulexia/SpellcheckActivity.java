@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +35,7 @@ public class SpellcheckActivity extends Activity {
 
 
     // List of misspelled words.
-    private static final ArrayList<String> msWords = new ArrayList<String>();
+    private static ArrayList<String> msWords = new ArrayList<String>();
 
     private CardScrollAdapter mAdapter;
     private CardScrollView mCardScroller;
@@ -50,11 +51,12 @@ public class SpellcheckActivity extends Activity {
         super.onCreate(bundle);
 
         // TODO: Fill msWords with words recognized via OCR
-        msWords.add("galery");
-        msWords.add("finaly");
+        //msWords.add("galery");
+        //msWords.add("finaly");
 
         // get data from OCRActivity
         Bundle b = getIntent().getExtras();
+        msWords = b.getStringArrayList("ocrResults");
 
         mAdapter = new CardAdapter(createCards(this));
         mCardScroller = new CardScrollView(this);

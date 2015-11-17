@@ -27,6 +27,10 @@ import android.provider.MediaStore;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -273,9 +277,11 @@ public class OCRActivity extends Activity {
         return gestureDetector;
     }
 
-    public void transitionToSpellcheck(String [] results, Intent intent) {
+    public void transitionToSpellcheck(List results, Intent intent) {
         Bundle params = new Bundle();
-        params.putStringArray("ocrResult", results);
+        ArrayList<String> ocrResults = new ArrayList<String>();
+        ocrResults.addAll(results);
+        params.putStringArrayList("ocrResults", ocrResults);
         intent.putExtras(params);
         startActivity(intent);
 
@@ -357,7 +363,7 @@ class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, Strin
         //Do anything with response..
         Log.d("OCR", "Implement a transition here?");
 
-        String [] results = result.split(" "); // split into array of words 
+        List<String> results = Arrays.asList(result.split(" "));
         ocrActivity.transitionToSpellcheck(results, intent);
     }
 }
