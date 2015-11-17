@@ -49,6 +49,9 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
 
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
@@ -365,22 +368,19 @@ class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, Strin
         //Do anything with response..
         Log.d("OCR", "Implement a transition here?");
 
-        Pattern errorPattern = Pattern.compile("\"IsErroredOnProcessing\":(.*?),");
-        Matcher errorMatcher = errorPattern.matcher(result);
+        try {
+            JSONObject resObj = new JSONObject(result);
+            JSONArray parsedRes = new JSONArray(resObj.getString("ParsedResults"));
+            JSONObject parsedResults = parsedRes.getJSONObject(0);
+            if(resObj.getBoolean("IsErroredOnProcessing")) {
+                // error occured in parsing - handle it
+            }
 
-        Pattern resPattern = Pattern.compile("\"ParsedText\":\"(.*?)\",");
-        Matcher resMatcher = resPattern.matcher(result);
-
-        if(errorMatcher.find() && (errorMatcher.group(1) == "true")) {
-            // error occured in parsing - handle it
-        }
-
-        if(resMatcher.find()) {
-            String res = resMatcher.group(1);
-            List<String> results = Arrays.asList(res.split(" "));
+            String res = parsedResults.getString("ParsedText");
+            List<String> results = Arrays.asList(res.split(" \r\n"));
             ocrActivity.transitionToSpellcheck(results, intent);
-        } else {
-            // text not found - show warning?
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }
