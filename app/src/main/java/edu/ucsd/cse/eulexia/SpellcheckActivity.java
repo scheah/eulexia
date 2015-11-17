@@ -16,6 +16,7 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class SpellcheckActivity extends Activity {
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         // get data from OCRActivity
         Bundle b = getIntent().getExtras();
         msWords = b.getStringArrayList("ocrResults");

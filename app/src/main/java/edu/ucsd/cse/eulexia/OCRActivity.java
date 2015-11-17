@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.MotionEvent;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.TextView;
 import android.graphics.Typeface;
@@ -93,7 +94,7 @@ public class OCRActivity extends Activity {
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mView = buildView();
         mGestureDetector = createGestureDetector(this);
         mProgressDialog = new ProgressDialog(this);

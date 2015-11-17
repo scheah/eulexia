@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 
 import java.lang.reflect.Array;
@@ -60,7 +61,7 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         // Retrieve saved suggestions from SpellCheckActivity
         Bundle b = getIntent().getExtras();
         suggList = b.getStringArrayList("suggestions");
