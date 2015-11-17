@@ -8,9 +8,15 @@ import com.swabunga.spell.event.SpellCheckListener; // asynchronous
 import com.swabunga.spell.event.SpellChecker;
 import com.swabunga.spell.event.StringWordTokenizer;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,15 +31,19 @@ import android.content.res.AssetManager;
  * Created by Sebastian on 10/26/2015.
  */
 public class SpellCheck implements SpellCheckListener {
+    private Context mContext;
     private static SpellCheck instance = null; // singleton, we do not want to keep re-reading a dictionary
     private static String dictFile = "english.0";
+    private static String userSuggestionFile = "usersuggestions.0";
     private static SpellChecker jazzySpellCheck = null;
     private String mOriginalText = null;
     private ArrayList<String> mMisspelledWords = new ArrayList<String>();
     private HashMap<String, ArrayList<String> > mSuggestions = new HashMap<String, ArrayList<String>>();
+    private HashMap<String, String> mUserSuggestions = null;
 
     protected SpellCheck(Context context/*, String bodyText*/) {
         //mOriginalText = bodyText;
+        mContext = context;
         AssetManager assetManager = context.getAssets();
         InputStream inputStream = null;
         SpellDictionary dictionary = null;
@@ -47,6 +57,28 @@ public class SpellCheck implements SpellCheckListener {
         jazzySpellCheck = new SpellChecker(dictionary);
         jazzySpellCheck.addSpellCheckListener(this); // callbacks implemented in this class, can possibly add listener to a different class
         //jazzySpellCheck.checkSpelling(new StringWordTokenizer(bodyText)); // asynchronous
+        File directory = context.getFilesDir();
+        if (!directory.exists()) directory.mkdirs();
+        File file = new File(context.getFilesDir(), userSuggestionFile);
+        try {
+            if(file.exists()) {
+                FileInputStream fileInputStream = new FileInputStream(file);
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+                mUserSuggestions = (HashMap) objectInputStream.readObject();
+                objectInputStream.close();
+            }
+            else {
+                file.createNewFile();
+                mUserSuggestions = new HashMap<String, String>();
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static SpellCheck getInstance(Context context) { // *Spellcheck.getInstance
@@ -98,5 +130,23 @@ public class SpellCheck implements SpellCheckListener {
 
     public ArrayList<String> getSuggestionsForWord(String key) {
         return mSuggestions.get(key);
+    }
+
+    public String getUserSuggestion(String misspelledWord) {
+        return mUserSuggestions.get(misspelledWord);
+    }
+
+    public void addUserSuggestion(String misspelledWord, String suggestedWord) {
+        mUserSuggestions.put(misspelledWord, suggestedWord);
+        File file = new File(mContext.getFilesDir(), userSuggestionFile);
+        try{
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(mUserSuggestions);
+            objectOutputStream.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
