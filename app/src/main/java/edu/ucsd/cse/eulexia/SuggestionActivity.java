@@ -42,7 +42,7 @@ import java.util.Locale;
  * Created by michelleawu on 11/12/15.
  * Creates a card scroll view containing all spelling suggestions.
  */
-public class SuggestionActivity extends Activity implements TextToSpeech.OnInitListener, GestureDetector.BaseListener {
+public class SuggestionActivity extends Activity implements TextToSpeech.OnInitListener {
 
     private static final String WORDLOG_FILENAME = "wordlog";
     private static final String TAG = SpellcheckActivity.class.getSimpleName();
@@ -101,6 +101,12 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
             }
         }
 
+        // reorder list - need this for updating suggestion priorities
+        suggList = new ArrayList<>();
+        for(Suggestion s : orderedSQ) {
+            suggList.add(s.word);
+        }
+
         // Create cards
         mAdapter = new CardAdapter(createCards(this), getBaseContext());
         mCardScroller = new CardScrollView(this);
@@ -109,9 +115,6 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
         setCardScrollerListener();
 
         tts = new TextToSpeech(this /* context */, this /* listener */);
-
-        // Initialize the gesture detector and set the activity to listen to discrete gestures.
-        mGestureDetector = new GestureDetector(this).setBaseListener(this);
     }
 
     @Override
@@ -134,9 +137,9 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     private List<CardBuilder> createCards(Context context) {
         ArrayList<CardBuilder> cards = new ArrayList<CardBuilder>();
         int i = 0;
-        for(Suggestion sugg : orderedSQ){
+        for(String word : suggList){
             cards.add(i, new CardBuilder(context, CardBuilder.Layout.MENU)
-            .setText(sugg.word)
+            .setText(word)
             .setFootnote(R.string.suggestion_card_menu_description));
             i++;
         }
@@ -211,25 +214,15 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
                 am.playSoundEffect(soundEffect);
             }
         });
-    }
 
-    @Override
-    public boolean onGesture(Gesture gesture) {
-        Log.e("tag", gesture.name());
-        if (gesture == Gesture.TWO_TAP) {
-            // select correct spelling
+        mCardScroller.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Overridden to allow the gesture detector to process motion events that occur anywhere within
-     * the activity.
-     */
-    @Override
-    public boolean onGenericMotionEvent(MotionEvent event) {
-        return mGestureDetector.onMotionEvent(event);
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG2, "Long clicked view at position " + position + ", row-id " + id);
+                // maybe play spelling on long click and select on click?
+                return true;
+            }
+        });
     }
 }
