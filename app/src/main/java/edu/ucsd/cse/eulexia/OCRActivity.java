@@ -79,6 +79,8 @@ public class OCRActivity extends Activity {
 
     private GestureDetector mGestureDetector;
 
+    private CameraView mCameraView;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_CAMERA) {
@@ -274,13 +276,15 @@ public class OCRActivity extends Activity {
             @Override
             public boolean onGesture(Gesture gesture) {
                 Log.e("tag", gesture.name());
-                if (gesture == Gesture.TAP) {
+                if (gesture == Gesture.LONG_PRESS) {
                     // do something on tap
+                    toggleCamera();
                 } else if (gesture == Gesture.TWO_TAP) {
                     // take picture and do OCR
                     return true;
                 } else if (gesture == Gesture.SWIPE_RIGHT) {
                     // do something on right (forward) swipe
+                    stopCameraPreview();
                     takePicture();
                     return true;
                 } else if (gesture == Gesture.SWIPE_LEFT) {
@@ -292,6 +296,26 @@ public class OCRActivity extends Activity {
         });
 
         return gestureDetector;
+    }
+
+    public void toggleCamera(){
+        if(mCameraView == null){
+            Log.d(getLocalClassName(), "Starting camera preview");
+            mCameraView = new CameraView(this);
+            setContentView(mCameraView);
+        }else{
+            // Stop camera and return back to main layout
+            stopCameraPreview();
+        }
+    }
+
+    public void stopCameraPreview(){
+        Log.d(getLocalClassName(), "Stopping camera preview");
+        if(mCameraView != null) {
+            mCameraView.releaseCamera();
+            mCameraView = null;
+            setContentView(mCardScroller);
+        }
     }
 
     public void transitionToSpellcheck(List results, Intent intent) {
