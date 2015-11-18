@@ -7,7 +7,7 @@
     <string name="title_activity_ocr">Check Spelling</string>
     <string name="misspelled_card_menu_description">Tap to see suggestions</string>
     <string name="suggestion_card_menu_description">Tap to hear spelling</string>
-    <string name="ocr_menu_description">Swipe forward to take a picture</string>
+    <string name="ocr_menu_description">Tap to take a picture</string>
 </resources>
 
 

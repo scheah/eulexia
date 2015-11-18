@@ -20,9 +20,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
+import java.lang.annotation.Documented;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.PriorityQueue;
 
 import android.speech.tts.TextToSpeech;
 import android.view.MotionEvent;
@@ -34,8 +43,9 @@ import java.util.Locale;
  * Created by michelleawu on 11/12/15.
  * Creates a card scroll view containing all spelling suggestions.
  */
-public class SuggestionActivity extends Activity implements TextToSpeech.OnInitListener, GestureDetector.BaseListener {
+public class SuggestionActivity extends Activity implements TextToSpeech.OnInitListener {
 
+    private static final String WORDLOG_FILENAME = "wordlog";
     private static final String TAG = SpellcheckActivity.class.getSimpleName();
     private static final String TAG2 = "Spellz";
 
@@ -47,8 +57,11 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     private boolean initialized = false;
     private String queuedText;
 
+    private Map<String, Integer> wordCountMap;
+
     // ArrayList of suggested spellings
     ArrayList<String> suggList = new ArrayList<String>();
+    PriorityQueue<Suggestion> orderedSQ = new PriorityQueue<Suggestion>();
 
     private CardScrollAdapter mAdapter;
     private CardScrollView mCardScroller;
@@ -66,6 +79,35 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
         Bundle b = getIntent().getExtras();
         suggList = b.getStringArrayList("suggestions");
 
+        try {
+            // read hashmap from file
+            FileInputStream fileInputStream = openFileInput(WORDLOG_FILENAME);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            wordCountMap = (HashMap) objectInputStream.readObject();
+            objectInputStream.close();
+
+        } catch (Exception e) {
+            // file not found - do something
+        }
+
+        // prioritize suggestions
+        for (String s : suggList) {
+            if(wordCountMap.containsKey(s)) {
+                Suggestion sugg = new Suggestion(s, wordCountMap.get(s));
+                orderedSQ.add(sugg);
+            } else {
+                Suggestion sugg = new Suggestion(s, 0);
+                orderedSQ.add(sugg);
+            }
+        }
+
+        // reorder list - need this for updating suggestion priorities
+        suggList = new ArrayList<>();
+        for(Suggestion s : orderedSQ) {
+            suggList.add(s.word);
+        }
+
         // Create cards
         mAdapter = new CardAdapter(createCards(this), getBaseContext());
         mCardScroller = new CardScrollView(this);
@@ -74,9 +116,20 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
         setCardScrollerListener();
 
         tts = new TextToSpeech(this /* context */, this /* listener */);
+    }
 
-        // Initialize the gesture detector and set the activity to listen to discrete gestures.
-        mGestureDetector = new GestureDetector(this).setBaseListener(this);
+    @Override
+    protected void onDestroy() {
+        try {
+            // write new data back to file
+            FileOutputStream fileOutputStream = openFileOutput(WORDLOG_FILENAME, Context.MODE_PRIVATE);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+
+            objectOutputStream.writeObject(wordCountMap);
+            objectOutputStream.close();
+        } catch(Exception e) {
+            // error
+        }
     }
 
     /**
@@ -149,45 +202,35 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG2, "Clicked view at position " + position + ", row-id " + id);
+
+                // Play success sound effect when user selects correct spelling
+                int soundEffect = Sounds.SUCCESS;
+                AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                am.playSoundEffect(soundEffect);
+
+                // update record
+                String word = suggList.get(position);
+                wordCountMap.put(word, wordCountMap.get(word) + 1);
+            }
+        });
+
+        mCardScroller.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG2, "Long clicked view at position " + position + ", row-id " + id);
+                // On long tap, play audio spelling
                 int soundEffect = Sounds.TAP;
-
-                // On tap, play audio spelling
-                spellWordAt(position);
-
                 /*soundEffect = Sounds.ERROR;
                 Log.d(TAG, "Don't show anything");*/
 
                 // Play sound.
                 AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                 am.playSoundEffect(soundEffect);
+
+                spellWordAt(position);
+                return true;
             }
         });
-    }
-
-    @Override
-    public boolean onGesture(Gesture gesture) {
-        Log.e("tag", gesture.name());
-        if (gesture == Gesture.TAP) {
-            return true;
-        } else if (gesture == Gesture.SWIPE_RIGHT) {
-            // go to next word
-            return true;
-        } else if (gesture == Gesture.SWIPE_LEFT) {
-            // go to prev word, or prev activity
-            return true;
-        }
-        else if (gesture == Gesture.SWIPE_DOWN) {
-            return false;
-        }
-        return false;
-    }
-
-    /**
-     * Overridden to allow the gesture detector to process motion events that occur anywhere within
-     * the activity.
-     */
-    @Override
-    public boolean onGenericMotionEvent(MotionEvent event) {
-        return mGestureDetector.onMotionEvent(event);
     }
 }

@@ -77,7 +77,11 @@ public class OCRActivity extends Activity {
      */
     private View mView;
 
+    private boolean inCameraPreview;
+
     private GestureDetector mGestureDetector;
+
+    private CameraView mCameraView;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -93,12 +97,13 @@ public class OCRActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle bundle) {
+        inCameraPreview = false;
         super.onCreate(bundle);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mView = buildView();
         mGestureDetector = createGestureDetector(this);
         mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.getWindow().addFlags( WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON );
+        mProgressDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setTitle("Loading...");
         mProgressDialog.setCancelable(false);
@@ -280,13 +285,20 @@ public class OCRActivity extends Activity {
             public boolean onGesture(Gesture gesture) {
                 Log.e("tag", gesture.name());
                 if (gesture == Gesture.TAP) {
+                    if(inCameraPreview){
+                        stopCameraPreview();
+                    }
+                }
+                else if (gesture == Gesture.LONG_PRESS) {
                     // do something on tap
-                } else if (gesture == Gesture.TWO_TAP) {
-                    // take picture and do OCR
+                    if(!inCameraPreview) {
+                        toggleCamera();
+                    }
+                }
+                else if (gesture == Gesture.TWO_TAP) {
                     return true;
                 } else if (gesture == Gesture.SWIPE_RIGHT) {
                     // do something on right (forward) swipe
-                    takePicture();
                     return true;
                 } else if (gesture == Gesture.SWIPE_LEFT) {
                     // do something on left (backwards) swipe
@@ -297,6 +309,29 @@ public class OCRActivity extends Activity {
         });
 
         return gestureDetector;
+    }
+
+    public void toggleCamera(){
+        if(mCameraView == null){
+            Log.d(getLocalClassName(), "Starting camera preview");
+            inCameraPreview = true;
+            mCameraView = new CameraView(this);
+            setContentView(mCameraView);
+        }else{
+            // Stop camera and return back to main layout
+            stopCameraPreview();
+            inCameraPreview = false;
+        }
+    }
+
+    public void stopCameraPreview(){
+        Log.d(getLocalClassName(), "Stopping camera preview");
+        if(mCameraView != null) {
+            takePicture();
+            mCameraView.releaseCamera();
+          //  mCameraView = null;
+           // setContentView(mCardScroller);
+        }
     }
 
     public void transitionToSpellcheck(List results, Intent intent) {
