@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 
 import android.speech.tts.TextToSpeech;
 import android.view.MotionEvent;
@@ -47,8 +48,6 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     private static final String TAG = SpellcheckActivity.class.getSimpleName();
     private static final String TAG2 = "Spellz";
 
-    private Map wordCountMap;
-
     // Gesture detection
     private GestureDetector mGestureDetector;
 
@@ -57,8 +56,11 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     private boolean initialized = false;
     private String queuedText;
 
+    private Map<String, Integer> wordCountMap;
+
     // ArrayList of suggested spellings
     ArrayList<String> suggList = new ArrayList<String>();
+    PriorityQueue<Suggestion> orderedSQ = new PriorityQueue<Suggestion>();
 
     private CardScrollAdapter mAdapter;
     private CardScrollView mCardScroller;
@@ -76,18 +78,6 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
         Bundle b = getIntent().getExtras();
         suggList = b.getStringArrayList("suggestions");
 
-        // Create cards
-        mAdapter = new CardAdapter(createCards(this), getBaseContext());
-        mCardScroller = new CardScrollView(this);
-        mCardScroller.setAdapter(mAdapter);
-        setContentView(mCardScroller);
-        setCardScrollerListener();
-
-        tts = new TextToSpeech(this /* context */, this /* listener */);
-
-        // Initialize the gesture detector and set the activity to listen to discrete gestures.
-        mGestureDetector = new GestureDetector(this).setBaseListener(this);
-
         try {
             // read hashmap from file
             FileInputStream fileInputStream = openFileInput(WORDLOG_FILENAME);
@@ -100,6 +90,28 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
             // file not found - do something
         }
 
+        // prioritize suggestions
+        for (String s : suggList) {
+            if(wordCountMap.containsKey(s)) {
+                Suggestion sugg = new Suggestion(s, wordCountMap.get(s));
+                orderedSQ.add(sugg);
+            } else {
+                Suggestion sugg = new Suggestion(s, 0);
+                orderedSQ.add(sugg);
+            }
+        }
+
+        // Create cards
+        mAdapter = new CardAdapter(createCards(this), getBaseContext());
+        mCardScroller = new CardScrollView(this);
+        mCardScroller.setAdapter(mAdapter);
+        setContentView(mCardScroller);
+        setCardScrollerListener();
+
+        tts = new TextToSpeech(this /* context */, this /* listener */);
+
+        // Initialize the gesture detector and set the activity to listen to discrete gestures.
+        mGestureDetector = new GestureDetector(this).setBaseListener(this);
     }
 
     @Override
@@ -122,9 +134,9 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     private List<CardBuilder> createCards(Context context) {
         ArrayList<CardBuilder> cards = new ArrayList<CardBuilder>();
         int i = 0;
-        for(String word : suggList){
+        for(Suggestion sugg : orderedSQ){
             cards.add(i, new CardBuilder(context, CardBuilder.Layout.MENU)
-            .setText(word)
+            .setText(sugg.word)
             .setFootnote(R.string.suggestion_card_menu_description));
             i++;
         }
