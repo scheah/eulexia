@@ -25,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
+import java.lang.annotation.Documented;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -201,17 +202,15 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG2, "Clicked view at position " + position + ", row-id " + id);
-                int soundEffect = Sounds.TAP;
 
-                // On tap, play audio spelling
-                spellWordAt(position);
-
-                /*soundEffect = Sounds.ERROR;
-                Log.d(TAG, "Don't show anything");*/
-
-                // Play sound.
+                // Play success sound effect when user selects correct spelling
+                int soundEffect = Sounds.SUCCESS;
                 AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                 am.playSoundEffect(soundEffect);
+
+                // update record
+                String word = suggList.get(position);
+                wordCountMap.put(word, wordCountMap.get(word) + 1);
             }
         });
 
@@ -220,7 +219,16 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG2, "Long clicked view at position " + position + ", row-id " + id);
-                // maybe play spelling on long click and select on click?
+                // On long tap, play audio spelling
+                int soundEffect = Sounds.TAP;
+                /*soundEffect = Sounds.ERROR;
+                Log.d(TAG, "Don't show anything");*/
+
+                // Play sound.
+                AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                am.playSoundEffect(soundEffect);
+
+                spellWordAt(position);
                 return true;
             }
         });
