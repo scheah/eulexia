@@ -306,7 +306,6 @@ public class OCRActivity extends Activity {
         }else{
             // Stop camera and return back to main layout
             stopCameraPreview();
-            setContentView(mCardScroller);
         }
     }
 
@@ -315,6 +314,7 @@ public class OCRActivity extends Activity {
         if(mCameraView != null) {
             mCameraView.releaseCamera();
             mCameraView = null;
+            setContentView(mCardScroller);
         }
     }
 
