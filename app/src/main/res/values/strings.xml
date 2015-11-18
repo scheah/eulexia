@@ -7,7 +7,7 @@
     <string name="title_activity_suggestion">Suggestion Activity</string>
     <string name="title_activity_test">Check Spelling</string>
     <string name="misspelled_card_menu_description">Tap to see suggestions</string>
-    <string name="suggestion_card_menu_description">Tap to hear spelling</string>
+    <string name="suggestion_card_menu_description">Swipe forward to hear spelling</string>
 </resources>
 
 

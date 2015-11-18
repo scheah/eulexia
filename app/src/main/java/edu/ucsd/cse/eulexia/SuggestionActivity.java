@@ -20,9 +20,16 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import android.speech.tts.TextToSpeech;
 import android.view.MotionEvent;
@@ -36,8 +43,11 @@ import java.util.Locale;
  */
 public class SuggestionActivity extends Activity implements TextToSpeech.OnInitListener, GestureDetector.BaseListener {
 
+    private static final String WORDLOG_FILENAME = "wordlog";
     private static final String TAG = SpellcheckActivity.class.getSimpleName();
     private static final String TAG2 = "Spellz";
+
+    private Map wordCountMap;
 
     // Gesture detection
     private GestureDetector mGestureDetector;
@@ -77,6 +87,33 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
 
         // Initialize the gesture detector and set the activity to listen to discrete gestures.
         mGestureDetector = new GestureDetector(this).setBaseListener(this);
+
+        try {
+            // read hashmap from file
+            FileInputStream fileInputStream = openFileInput(WORDLOG_FILENAME);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            wordCountMap = (HashMap) objectInputStream.readObject();
+            objectInputStream.close();
+
+        } catch (Exception e) {
+            // file not found - do something
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        try {
+            // write new data back to file
+            FileOutputStream fileOutputStream = openFileOutput(WORDLOG_FILENAME, Context.MODE_PRIVATE);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+
+            objectOutputStream.writeObject(wordCountMap);
+            objectOutputStream.close();
+        } catch(Exception e) {
+            // error
+        }
     }
 
     /**
@@ -167,17 +204,10 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
     @Override
     public boolean onGesture(Gesture gesture) {
         Log.e("tag", gesture.name());
-        if (gesture == Gesture.TAP) {
+        if (gesture == Gesture.TWO_TAP) {
+            // select correct spelling
+
             return true;
-        } else if (gesture == Gesture.SWIPE_RIGHT) {
-            // go to next word
-            return true;
-        } else if (gesture == Gesture.SWIPE_LEFT) {
-            // go to prev word, or prev activity
-            return true;
-        }
-        else if (gesture == Gesture.SWIPE_DOWN) {
-            return false;
         }
         return false;
     }
