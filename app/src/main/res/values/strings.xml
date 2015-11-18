@@ -2,12 +2,12 @@
     <string name="voice_trigger">show me a demo</string>
     <string name="app_name">Eulexia</string>
     <string name="title_activity_main">Main View</string>
-    <string name="hello_world">Hello world test!</string>
     <string name="title_activity_spellcheck">Spellcheck Activity</string>
     <string name="title_activity_suggestion">Suggestion Activity</string>
-    <string name="title_activity_test">Check Spelling</string>
+    <string name="title_activity_ocr">Check Spelling</string>
     <string name="misspelled_card_menu_description">Tap to see suggestions</string>
     <string name="suggestion_card_menu_description">Tap to hear spelling</string>
+    <string name="ocr_menu_description">Swipe forward to take a picture</string>
 </resources>
 
 

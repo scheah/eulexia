@@ -158,20 +158,25 @@ public class OCRActivity extends Activity {
      * Builds a Glass styled "Hello World!" view using the {@link CardBuilder} class.
      */
     private View buildView() {
-//        CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);
-//
-//        card.setText("take1");
-//        return card.getView();
+        View view = new CardBuilder(getApplicationContext(), CardBuilder.Layout.ALERT)
+                .setIcon(R.drawable.ic_spellcheck)
+                .setText(R.string.title_activity_ocr)
+                .setFootnote(R.string.ocr_menu_description)
+                .getView();
 
-        View view = new CardBuilder(this, CardBuilder.Layout.EMBED_INSIDE)
+        return view;
+
+        /*View view = new CardBuilder(this, CardBuilder.Layout.EMBED_INSIDE)
                 .setEmbeddedLayout(R.layout.main_view)
                 .getView();
 
         TextView textView1 = (TextView) view.findViewById(R.id.textView);
         Typeface tf = Typeface.createFromAsset(getAssets(),
-                "fonts/bookmanoldstyle.ttf");
+                "fonts/Calibri.ttf");
         textView1.setTypeface(tf);
-        return view;
+        textView1.setText("Swipe forward to take a picture");
+
+        return view;*/
     }
 
 
@@ -313,7 +318,7 @@ class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, Strin
 
     public OCRRequest(OCRActivity activity, Context context) {
         mProgressDialog = new ProgressDialog(activity);
-        mProgressDialog.getWindow().addFlags( WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON );
+        mProgressDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setTitle("Loading...");
         mProgressDialog.setCancelable(false);

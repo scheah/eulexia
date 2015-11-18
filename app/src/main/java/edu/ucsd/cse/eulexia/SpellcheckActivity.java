@@ -68,8 +68,9 @@ public class SpellcheckActivity extends Activity {
         ArrayList<CardBuilder> cards = new ArrayList<CardBuilder>();
         int i = 0;
         for(String word : msWords) {
-            cards.add(i, new CardBuilder(context, CardBuilder.Layout.EMBED_INSIDE)
-                    .setEmbeddedLayout(R.layout.main_view)
+            cards.add(i, new CardBuilder(context, CardBuilder.Layout.MENU)
+                  //  .setEmbeddedLayout(R.layout.main_view)
+                    .setText(word)
                     .setFootnote(R.string.misspelled_card_menu_description));
             i++;
         }

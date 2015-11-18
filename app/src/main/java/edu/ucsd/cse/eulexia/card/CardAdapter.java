@@ -49,7 +49,8 @@ public class CardAdapter extends CardScrollAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = mCards.get(position).getView(convertView, parent);
+        return mCards.get(position).getView(convertView, parent);
+      /*  View view = mCards.get(position).getView(convertView, parent);
         TextView textView1 = (TextView) view.findViewById(R.id.textView);
         Typeface tf = Typeface.createFromAsset(mContext.getAssets(),
                 "fonts/bookmanoldstyle.ttf");
@@ -58,7 +59,7 @@ public class CardAdapter extends CardScrollAdapter {
             textView1.setText(msWords.get(position));
         }
 
-        return view;
+        return view;*/
     }
 
     @Override
