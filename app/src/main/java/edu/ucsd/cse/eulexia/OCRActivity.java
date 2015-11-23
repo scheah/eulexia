@@ -11,6 +11,7 @@ import com.google.android.glass.touchpad.*;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -163,9 +164,11 @@ public class OCRActivity extends Activity {
      * Builds a Glass styled "Hello World!" view using the {@link CardBuilder} class.
      */
     private View buildView() {
-        View view = new CardBuilder(getApplicationContext(), CardBuilder.Layout.ALERT)
-                .setIcon(R.drawable.ic_spellcheck)
-                .setText(R.string.title_activity_ocr)
+        Drawable mtitle = getResources().getDrawable(R.drawable.titlemoon);
+        View view = new CardBuilder(getApplicationContext(), CardBuilder.Layout.CAPTION)
+                .addImage(mtitle)
+                //.setIcon(R.drawable.ic_spellcheck)
+                //.setText(R.string.title_activity_ocr)
                 .setFootnote(R.string.ocr_menu_description)
                 .getView();
 
