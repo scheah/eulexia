@@ -11,6 +11,7 @@ import com.google.android.glass.touchpad.*;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -77,8 +78,6 @@ public class OCRActivity extends Activity {
      */
     private View mView;
 
-    private boolean inCameraPreview;
-
     private GestureDetector mGestureDetector;
 
     private CameraView mCameraView;
@@ -97,13 +96,12 @@ public class OCRActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle bundle) {
-        inCameraPreview = false;
         super.onCreate(bundle);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mView = buildView();
         mGestureDetector = createGestureDetector(this);
         mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        mProgressDialog.getWindow().addFlags( WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON );
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setTitle("Loading...");
         mProgressDialog.setCancelable(false);
@@ -163,9 +161,11 @@ public class OCRActivity extends Activity {
      * Builds a Glass styled "Hello World!" view using the {@link CardBuilder} class.
      */
     private View buildView() {
-        View view = new CardBuilder(getApplicationContext(), CardBuilder.Layout.ALERT)
-                .setIcon(R.drawable.ic_spellcheck)
-                .setText(R.string.title_activity_ocr)
+        Drawable mtitle = getResources().getDrawable(R.drawable.titlemoon);
+        View view = new CardBuilder(getApplicationContext(), CardBuilder.Layout.CAPTION)
+                .addImage(mtitle)
+                //.setIcon(R.drawable.ic_spellcheck)
+                //.setText(R.string.title_activity_ocr)
                 .setFootnote(R.string.ocr_menu_description)
                 .getView();
 
@@ -208,6 +208,7 @@ public class OCRActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == TAKE_PICTURE_REQUEST && resultCode == RESULT_OK) {
+            stopCameraPreview();
             String thumbnailPath = data.getStringExtra(Intents.EXTRA_THUMBNAIL_FILE_PATH);
             String picturePath = data.getStringExtra(Intents.EXTRA_PICTURE_FILE_PATH);
             Log.d("OCR", "the picture will be saved to: " + picturePath);
@@ -284,21 +285,16 @@ public class OCRActivity extends Activity {
             @Override
             public boolean onGesture(Gesture gesture) {
                 Log.e("tag", gesture.name());
-                if (gesture == Gesture.TAP) {
-                    if(inCameraPreview){
-                        stopCameraPreview();
-                    }
-                }
-                else if (gesture == Gesture.LONG_PRESS) {
+                if (gesture == Gesture.LONG_PRESS) {
                     // do something on tap
-                    if(!inCameraPreview) {
-                        toggleCamera();
-                    }
-                }
-                else if (gesture == Gesture.TWO_TAP) {
+                    toggleCamera();
+                } else if (gesture == Gesture.TWO_TAP) {
+                    // take picture and do OCR
                     return true;
                 } else if (gesture == Gesture.SWIPE_RIGHT) {
                     // do something on right (forward) swipe
+                   // stopCameraPreview();
+                    takePicture();
                     return true;
                 } else if (gesture == Gesture.SWIPE_LEFT) {
                     // do something on left (backwards) swipe
@@ -314,23 +310,20 @@ public class OCRActivity extends Activity {
     public void toggleCamera(){
         if(mCameraView == null){
             Log.d(getLocalClassName(), "Starting camera preview");
-            inCameraPreview = true;
             mCameraView = new CameraView(this);
             setContentView(mCameraView);
         }else{
             // Stop camera and return back to main layout
             stopCameraPreview();
-            inCameraPreview = false;
         }
     }
 
     public void stopCameraPreview(){
         Log.d(getLocalClassName(), "Stopping camera preview");
         if(mCameraView != null) {
-            takePicture();
             mCameraView.releaseCamera();
-          //  mCameraView = null;
-           // setContentView(mCardScroller);
+            mCameraView = null;
+            setContentView(mCardScroller);
         }
     }
 
