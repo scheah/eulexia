@@ -338,6 +338,7 @@ public class OCRActivity extends Activity {
     }
 }
 
+
 class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, String/*result*/> {
     private String url="https://ocr.a9t9.com/api/Parse/Image";
     private ProgressDialog mProgressDialog;
@@ -359,12 +360,13 @@ class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, Strin
 
     @Override
     protected void onPreExecute() {
-        mProgressDialog.show();
+        Log.d("OCR","onpreExecute");
         mProgressDialog.setMessage("Starting OCR Request...");
+        mProgressDialog.setCancelable(false);
         mProgressDialog.setProgress(33);
+        mProgressDialog.show();
         //Display the progress dialog
     }
-
     @Override
     protected String doInBackground(String... uri) {
         Log.d("OCR", "performing http POST with picture " + uri[0]);
@@ -379,6 +381,7 @@ class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, Strin
         builder.addTextBody("language", "eng", ContentType.TEXT_PLAIN);
         HttpEntity multipart = builder.build();
         httpPost.setEntity(multipart);
+        mProgressDialog.show();
         mProgressDialog.setMessage("Receiving OCR Response...");
         mProgressDialog.setProgress(66);
         try {
@@ -404,6 +407,7 @@ class OCRRequest extends AsyncTask<String /*params*/, String /*progress*/, Strin
             //TODO Handle problems..
             Log.d("OCR", e.getMessage());
         }
+        Log.d("OCR","ocr result is " +  responseString);
         return responseString;
     }
 
