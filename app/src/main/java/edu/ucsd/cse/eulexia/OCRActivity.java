@@ -177,11 +177,11 @@ public class OCRActivity extends Activity {
      * Builds a Glass styled "Hello World!" view using the {@link CardBuilder} class.
      */
     private View buildView() {
-        Drawable mtitle = getResources().getDrawable(R.drawable.titlemoon);
-        View view = new CardBuilder(getApplicationContext(), CardBuilder.Layout.CAPTION)
-                .addImage(mtitle)
-                //.setIcon(R.drawable.ic_spellcheck)
-                //.setText(R.string.title_activity_ocr)
+     //   Drawable mtitle = getResources().getDrawable(R.drawable.titlemoon);
+        View view = new CardBuilder(getApplicationContext(), CardBuilder.Layout.MENU)
+       //         .addImage(mtitle)
+                .setIcon(R.drawable.ic_spellcheck)
+                .setText(R.string.title_activity_ocr)
                 .setFootnote(R.string.ocr_menu_description)
                 .getView();
 
