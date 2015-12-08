@@ -102,6 +102,10 @@ public class SpellCheck implements SpellCheckListener {
         // returns true if word was misspelled
     }
 
+    public boolean wordMisspelled(String word) {
+        return !(mDictionary.isCorrect(word));
+    }
+
     public void spellingError(SpellCheckEvent event) {
         String invalidWord = event.getInvalidWord();
         List suggestionsList = event.getSuggestions();
