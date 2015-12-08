@@ -120,6 +120,7 @@ public class SuggestionActivity extends Activity implements TextToSpeech.OnInitL
         } catch(Exception e) {
             // error
         }*/
+        super.onDestroy();
     }
 
     /**
