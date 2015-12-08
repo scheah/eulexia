@@ -31,6 +31,7 @@ public class SpellcheckActivity extends Activity {
 
     // List of misspelled words.
     private static ArrayList<String> allWords = new ArrayList<String>();
+    private static ArrayList<String> msWords = new ArrayList<String>();
 
     private CardScrollAdapter mAdapter;
     private CardScrollView mCardScroller;
@@ -68,6 +69,7 @@ public class SpellcheckActivity extends Activity {
         mSpellChecker = SpellCheck.getInstance(context);
         for(String word : allWords) {
             if (mSpellChecker.wordMisspelled(word)) {
+                msWords.add(word);
                 Log.d(TAG, "Misspelled word is " + word);
                 cards.add(i, new CardBuilder(context, CardBuilder.Layout.MENU)
                         //  .setEmbeddedLayout(R.layout.main_view)
@@ -93,7 +95,7 @@ public class SpellcheckActivity extends Activity {
 
     // Check misspelled word against dictionary and pass suggestions to next intent
     private void checkSpelling(int index, Intent _intent, Bundle _params){
-        String currWord = allWords.get(index);
+        String currWord = msWords.get(index);
 
         // Check misspelled word
         //mSpellChecker.checkWords(currWord);
