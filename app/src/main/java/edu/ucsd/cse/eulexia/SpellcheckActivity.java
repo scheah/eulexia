@@ -3,8 +3,6 @@ package edu.ucsd.cse.eulexia;
 import com.google.android.glass.media.Sounds;
 import edu.ucsd.cse.eulexia.card.CardAdapter;
 
-import com.google.android.glass.touchpad.Gesture;
-import com.google.android.glass.touchpad.GestureDetector;
 import com.google.android.glass.widget.CardBuilder;
 import com.google.android.glass.widget.CardScrollAdapter;
 import com.google.android.glass.widget.CardScrollView;
@@ -28,12 +26,11 @@ import java.util.List;
  */
 public class SpellcheckActivity extends Activity {
 
-    private static final String TAG = SpellcheckActivity.class.getSimpleName();
-    private static final String TAG2 = "Spellz";
+    private static final String TAG = "Spellchecking";
 
 
     // List of misspelled words.
-    private static ArrayList<String> msWords = new ArrayList<String>();
+    private static ArrayList<String> allWords = new ArrayList<String>();
 
     private CardScrollAdapter mAdapter;
     private CardScrollView mCardScroller;
@@ -50,15 +47,16 @@ public class SpellcheckActivity extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         // get data from OCRActivity
         Bundle b = getIntent().getExtras();
-        msWords = b.getStringArrayList("ocrResults");
 
-        mAdapter = new CardAdapter(createCards(this), getBaseContext(), msWords);
+        allWords = b.getStringArrayList("ocrResults");
+
+        mAdapter = new CardAdapter(createCards(this), getBaseContext(), allWords);
         mCardScroller = new CardScrollView(this);
         mCardScroller.setAdapter(mAdapter);
         setContentView(mCardScroller);
         setCardScrollerListener();
         mSpellChecker = SpellCheck.getInstance(getApplicationContext());
-        Log.d(TAG2, "Done loading Jazzy");
+        Log.d(TAG, "Done loading Jazzy");
     }
 
     /**
@@ -67,13 +65,16 @@ public class SpellcheckActivity extends Activity {
     private List<CardBuilder> createCards(Context context) {
         ArrayList<CardBuilder> cards = new ArrayList<CardBuilder>();
         int i = 0;
-        for(String word : msWords) {
-            Log.d(TAG2, "Misspelled word is " + word);
-            cards.add(i, new CardBuilder(context, CardBuilder.Layout.MENU)
-                  //  .setEmbeddedLayout(R.layout.main_view)
-                    .setText(word)
-                    .setFootnote(R.string.misspelled_card_menu_description));
-            i++;
+        mSpellChecker = SpellCheck.getInstance(context);
+        for(String word : allWords) {
+            if (mSpellChecker.wordMisspelled(word)) {
+                Log.d(TAG, "Misspelled word is " + word);
+                cards.add(i, new CardBuilder(context, CardBuilder.Layout.MENU)
+                        //  .setEmbeddedLayout(R.layout.main_view)
+                        .setText(word)
+                        .setFootnote(R.string.misspelled_card_menu_description));
+                i++;
+            }
         }
         return cards;
     }
@@ -92,16 +93,17 @@ public class SpellcheckActivity extends Activity {
 
     // Check misspelled word against dictionary and pass suggestions to next intent
     private void checkSpelling(int index, Intent _intent, Bundle _params){
-        String currWord = msWords.get(index);
+        String currWord = allWords.get(index);
 
         // Check misspelled word
         //mSpellChecker.checkWords(currWord);
         boolean misspelled = mSpellChecker.checkWordSynchronous(currWord);
         if(!misspelled) {
-            // handle this
+            Log.d(TAG, "This word is not misspelled: " + currWord);
         }
         else if(mSpellChecker.getSuggestionsForWord(currWord).size() == 0) {
             // no suggestions, handle this
+            Log.d(TAG, "This misspelled word has no suggestions: " + currWord);
         }
         else {
             // Pass suggested words to SuggestionActivity
@@ -122,7 +124,7 @@ public class SpellcheckActivity extends Activity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TAG2, "Clicked view at position " + position + ", row-id " + id);
+                Log.d(TAG, "Clicked view at position " + position + ", row-id " + id);
                 int soundEffect = Sounds.TAP;
 
                 final Intent intent = new Intent(SpellcheckActivity.this, SuggestionActivity.class);
